@@ -26,6 +26,13 @@ config config --local status.showUntrackedFiles no
 
 git clone git@github.com:jotix/password-store.git ~/.password-store
 
+########## QMK #################################################################
+
+git clone git@github.com:jotix/qmk_firmware.git
+cd qmk_firmware
+git remote add upstream https://github.com/qmk/qmk_firmware.git
+qmk setup
+
 ####### vial udev rules ########################################################
 
 #export USER_GID=`id -g`; sudo --preserve-env=USER_GID sh -c 'echo "KERNEL==\"hidraw*\", SUBSYSTEM==\"hidraw\", MODE=\"0660\", GROUP=\"$USER_GID\", TAG+=\"uaccess\", TAG+=\"udev-acl\"" > /etc/udev/rules.d/92-viia.rules && udevadm control --reload && udevadm trigger'
@@ -56,4 +63,11 @@ sudo pacman -U *x86_64.pkg.tar.zst
 
 ### bach to home
 cd ~
+
+############### Flatpaks #######################################################
+#
+flatpak install com.google.Chrome
+flatpak install com.spotify.Client
+flatpak install com.valvesoftware.Steam
+flatpak override --filesystem=/mnt/btrfs-vol-2 com.valvesoftware.Steam --user
 
