@@ -127,7 +127,7 @@ XF#+TITLE: JOTIX emacs config.org
 #+begin_src emacs-lisp
 (defun jtx/set-font-faces ()
   (set-face-attribute 'default nil
-		      :font "Jetbrains MOno"
+		      :font "Jetbrains Mono"
 		      :height 100
 		      :weight 'medium)
 
