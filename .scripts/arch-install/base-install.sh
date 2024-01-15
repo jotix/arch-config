@@ -9,6 +9,7 @@ sed -i "s/#$DOW/$DOW/g" /etc/pacman.conf
 mount LABEL=btrfs-vol-1 /mnt
 DIR=$PWD
 cd /mnt
+btrfs subvolume create arch
 btrfs subvolume create arch/root
 btrfs subvolume create arch/home
 btrfs subvolume create arch/swap
