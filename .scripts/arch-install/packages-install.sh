@@ -62,6 +62,9 @@ usermod -a -G libvirt jotix
 systemctl enable libvirtd.service
 systemctl start libvirtd.service
 
+### qmk
+pacman -S qmk
+
 ### copy arch-install
 mkdir -p /home/jotix/arch-install
 cp -rv ./* /home/jotix/arch-install/
