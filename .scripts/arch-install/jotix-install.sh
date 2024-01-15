@@ -65,9 +65,8 @@ sudo pacman -U *x86_64.pkg.tar.zst
 cd ~
 
 ############### Flatpaks #######################################################
-#
+
 flatpak install com.google.Chrome
 flatpak install com.spotify.Client
 flatpak install com.valvesoftware.Steam
 flatpak override --filesystem=/mnt/btrfs-vol-2 com.valvesoftware.Steam --user
-
