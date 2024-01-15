@@ -36,8 +36,10 @@ nerd-fonts
 ttf-firacode-nerd 
 ttf-jetbrains-mono 
 ttf-jetbrains-mono-nerd
-gnome 
-gnome-extra
+plasma
+kde-applications
+plasma-wayland-session
+kitty
 lazygit 
 python-lsp-server
 emacs
@@ -52,7 +54,7 @@ if [ $? -ne 0 ]; then
 fi
 
 ### display manager
-systemctl enable gdm
+systemctl enable sddm
 
 ### libvirt config
 pacman -S libvirt iptables-nft dnsmasq dmidecode virt-manager qemu-full
