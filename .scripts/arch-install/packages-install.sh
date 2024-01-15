@@ -54,6 +54,13 @@ fi
 ### display manager
 systemctl enable gdm
 
+### libvirt config
+pacman -S libvirt iptables-nft dnsmasq dmidecode virt-manager qemu-full
+usermod -a -G libvirt jotix
+systemctl enable libvirtd.service
+systemctl start libvirtd.service
+
+### copy arch-install
 mkdir -p /home/jotix/arch-install
 cp -rv ./* /home/jotix/arch-install/
 chown -R jotix /home/jotix/arch-install
