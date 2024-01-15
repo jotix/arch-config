@@ -12,7 +12,7 @@ config() {
 }
 
 cd $HOME
-git clone --bare git@github.com:jotix/.dotfiles.git $HOME/.dotfiles
+git clone --bare git@github.com:jotix/dotfiles.git $HOME/.dotfiles
 
 ### make copy af existing files
 mkdir -p $HOME/.dotfiles-backup
@@ -28,13 +28,13 @@ git clone git@github.com:jotix/password-store.git ~/.password-store
 
 ####### vial udev rules ########################################################
 
-export USER_GID=`id -g`; sudo --preserve-env=USER_GID sh -c 'echo "KERNEL==\"hidraw*\", SUBSYSTEM==\"hidraw\", MODE=\"0660\", GROUP=\"$USER_GID\", TAG+=\"uaccess\", TAG+=\"udev-acl\"" > /etc/udev/rules.d/92-viia.rules && udevadm control --reload && udevadm trigger'
+#export USER_GID=`id -g`; sudo --preserve-env=USER_GID sh -c 'echo "KERNEL==\"hidraw*\", SUBSYSTEM==\"hidraw\", MODE=\"0660\", GROUP=\"$USER_GID\", TAG+=\"uaccess\", TAG+=\"udev-acl\"" > /etc/udev/rules.d/92-viia.rules && udevadm control --reload && udevadm trigger'
 
 ####### syncthing ##############################################################
 
-sudo pacman -S syncthing
-systemctl enable syncthing.service --user
-systemctl start syncthing.service --user
+#sudo pacman -S syncthing
+#systemctl enable syncthing.service --user
+#systemctl start syncthing.service --user
 
 ############### AUR packages ###################################################
 
