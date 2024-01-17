@@ -1,19 +1,13 @@
 ### joti's arch linux system install
 ### execute this script after base-install.sh & chroot to the new install
 
-### 
-### Edit variables
-###
+
+### CHANGE DEFAULTS PASSWORD BEFORE THE INSTALLATION IS COMPLETE
 HOSTNAME=jtx-arch
 ROOTPASSWD=pass
 USERNAME=jotix
 USERPASSWD=pass
 ###
-
-if [[ $HOSTNAME == "" || $ROOTPASSWD == "" || $USERNAME == "" || $USERPASSWD == "" ]]; then
-    echo "EDITAR LAS VARIABLES EN EL SCRIPT"
-    exit
-fi
 
 ### localtime
 ln -sf /usr/share/zoneinfo/America/Buenos_Aires /etc/localtime
@@ -61,7 +55,9 @@ systemctl enable NetworkManager
 systemctl enable ntpdate
 systemctl enable fstrim.timer
 
-echo ----------------------------------
-echo Run the script packages-install.sh
-echo ----------------------------------
-
+echo ---------------------------------------------
+echo REMEMBER: 
+echo CHANGE THE DEFAULTS PASSWORD NOW !!!
+echo ---------------------------------------------
+echo After that run the script packages-install.sh
+echo ---------------------------------------------

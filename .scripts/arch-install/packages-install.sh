@@ -1,3 +1,6 @@
+### joti'x arch linux packages to install
+#
+
 PACKAGES="
 xf86-video-amdgpu
 vulkan-radeon mesa
@@ -36,15 +39,14 @@ nerd-fonts
 ttf-firacode-nerd 
 ttf-jetbrains-mono 
 ttf-jetbrains-mono-nerd
-plasma
-kde-applications
-plasma-wayland-session
 kitty
 lazygit 
 python-lsp-server
 emacs
 nextcloud-client
-nextcloud-client-cloudproviders"
+nextcloud-client-cloudproviders
+gnome
+gnome-extra"
 
 ### install packages
 pacman -S --noconfirm --needed --overwrite \* $PACKAGES

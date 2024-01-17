@@ -1,12 +1,13 @@
-### jotix's arch l:inux base install
+### jotix's arch linux base install
 ### requisites: 
-### ef00 partition with LABEL=EFI-ARCH
-### btrfs partition with LABEL=btrfs-vol-1 
+### ef00 partition with LABEL=JTX-EFI
+### btrfs partition with LABEL=jtx-system
 
 DOW="ParallelDownloads = 5"
 sed -i "s/#$DOW/$DOW/g" /etc/pacman.conf
 
-mount LABEL=btrfs-vol-1 /mnt
+### creating btrfs subvolumes
+mount LABEL=jtx-system /mnt
 DIR=$PWD
 cd /mnt
 btrfs subvolume create arch
@@ -17,29 +18,29 @@ btrfs filesystem mkswapfile --size 4g --uuid clear arch/swap/swapfile
 cd $DIR
 umount /mnt
 
-mount LABEL=btrfs-vol-1 /mnt -osubvol=arch/root
+### mounting root
+mount LABEL=jtx-system /mnt -osubvol=arch/root
+
+### mounting home
 mkdir -p /mnt/home
+mount LABEL=jtx-system /mnt/home -osubvol=arch/home
+
+### mountin esp partition
 mkdir -p /mnt/boot/efi
-mount LABEL=btrfs-vol-1 /mnt/home -osubvol=arch/home
-mount LABEL=EFI-ARCH /mnt/boot/efi
+mount LABEL=JTX-EFI /mnt/boot/efi
 
-### extra filesystems
-mkdir -p /mnt/mnt/btrfs-vol-1
-mkdir -p /mnt/mnt/btrfs-vol-2
-mkdir -p /mnt/mnt/btrfs-vol-3
-mkdir -p /mnt/mnt/Ventoy
+### mounting swap
 mkdir -p /mnt/mnt/swap
-mount LABEL=btrfs-vol-1 /mnt/mnt/btrfs-vol-1
-mount LABEL=btrfs-vol-1 /mnt/mnt/swap -osubvol=arch/swap
+mount LABEL=jtx-system /mnt/mnt/swap -osubvol=arch/swap
 swapon /mnt/mnt/swap/swapfile
-mount LABEL=btrfs-vol-2 /mnt/mnt/btrfs-vol-2
-mount LABEL=btrfs-vol-3 /mnt/mnt/btrfs-vol-3
-mount LABEL=Ventoy /mnt/mnt/Ventoy
 
+### install base system
 pacstrap /mnt base linux linux-firmware git neovim
 
+### generate fstab
 genfstab -U /mnt >> /mnt/etc/fstab
 
+### copy arch-install scripts to the new installation
 mkdir -p /mnt/root/arch-install
 cp -rv ./* /mnt/root/arch-install
 echo ''
@@ -48,6 +49,6 @@ echo 'run the commands'
 echo '> arch-chroot /mnt'
 echo '> cd /root/arch-install'
 echo 'nvim system-install'
-echo 'EDIT the variable'
+echo 'EDIT the variables'
 echo '> ./system-install.sh'
 echo '-----------------------'
