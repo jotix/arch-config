@@ -4,8 +4,15 @@
 ### run this script after installing the complete system and
 ### after install the gpg keys for acces the github repos
 
+####### copy jotix credentials #################################################
 
-####### dotfiles #############################################################
+sudo mkdir -p /mnt/Ventoy
+sudo mount LABEL=Ventoy /mnt/Ventoy
+cd /mnt/Ventoy/jotix
+jotix-install.sh
+cd $HOME
+
+####### dotfiles ###############################################################
 
 config() {
   git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME $@
@@ -31,8 +38,9 @@ git clone git@github.com:jotix/password-store.git ~/.password-store
 git clone git@github.com:jotix/qmk_firmware.git
 cd qmk_firmware
 git remote add upstream https://github.com/qmk/qmk_firmware.git
+sudo cp util/udev/50-qmk.rules /etc/udev/rules.d/50-qmk.rules
 qmk setup
-
+cd $HOME
 ####### vial udev rules ########################################################
 
 #export USER_GID=`id -g`; sudo --preserve-env=USER_GID sh -c 'echo "KERNEL==\"hidraw*\", SUBSYSTEM==\"hidraw\", MODE=\"0660\", GROUP=\"$USER_GID\", TAG+=\"uaccess\", TAG+=\"udev-acl\"" > /etc/udev/rules.d/92-viia.rules && udevadm control --reload && udevadm trigger'
