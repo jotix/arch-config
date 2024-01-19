@@ -1,6 +1,8 @@
-### joti'x arch linux packages to install
-#
-
+DESKTOP="
+plasma
+kde-applications
+plasma-wayland-session
+"
 PACKAGES="
 xf86-video-amdgpu
 vulkan-radeon mesa
@@ -44,9 +46,17 @@ lazygit
 python-lsp-server
 emacs
 nextcloud-client
-nextcloud-client-cloudproviders
-gnome
-gnome-extra"
+nextcloud-client-cloudproviders"
+
+### install desktop
+pacman -S --noconfirm --needed --overwrite \* $DESKTOP
+if [ $? -ne 0 ]; then
+  echo "Ocurrio in error instalando el entorno de escritorio."
+  exit 1
+fi
+
+### display manager
+systemctl enable sddm
 
 ### install packages
 pacman -S --noconfirm --needed --overwrite \* $PACKAGES
@@ -54,9 +64,6 @@ if [ $? -ne 0 ]; then
   echo "Ocurrio in error instalando los paquetes."
   exit 1
 fi
-
-### display manager
-systemctl enable sddm
 
 ### libvirt config
 pacman -S libvirt iptables-nft dnsmasq dmidecode virt-manager qemu-full
