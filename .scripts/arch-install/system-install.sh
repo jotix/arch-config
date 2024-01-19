@@ -37,7 +37,7 @@ LC_MEASUREMENT=es_AR.UTF-8' > /etc/locale.conf
 echo $HOSTNAME > /etc/hostname
 
 ### install packages
-pacman -S grub efibootmgr sudo networkmanager ntp unzip amd-ucode dosfstools ntfs-3g
+pacman -S grub efibootmgr sudo networkmanager ntp unzip amd-ucode dosfstools ntfs-3g exfatprogs
 
 ### bootloader
 grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=Arch-Grub
