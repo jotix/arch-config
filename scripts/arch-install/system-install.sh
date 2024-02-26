@@ -48,7 +48,7 @@ echo root:$ROOTPASSWD | chpasswd root
 SUDOERS="%wheel ALL=(ALL:ALL) ALL"
 sed -i "s/# $SUDOERS/$SUDOERS/g" /etc/sudoers
 useradd -m -G wheel -s /bin/bash $USERNAME
-echo $USERNAME:$USERPASSWD | chpasswd jotix
+echo $USERNAME:$USERPASSWD | chpasswd $USERNAME
 
 ### starting services
 systemctl enable NetworkManager

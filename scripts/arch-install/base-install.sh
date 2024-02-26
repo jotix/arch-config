@@ -41,13 +41,12 @@ pacstrap /mnt base linux linux-firmware git neovim
 genfstab -U /mnt >> /mnt/etc/fstab
 
 ### copy arch-install scripts to the new installation
-mkdir -p /mnt/root/arch-install
-cp -rv ./* /mnt/root/arch-install
+cp -rv /root/arch-config /mnt/root/arch-config
 echo ''
 echo '-----------------------'
 echo 'run the commands'
 echo '> arch-chroot /mnt'
-echo '> cd /root/arch-install'
+echo '> cd /root/arch-config/scipts/rch-install'
 echo 'nvim system-install'
 echo 'EDIT the variables'
 echo '> ./system-install.sh'

@@ -3,6 +3,7 @@ plasma
 kde-applications
 plasma-wayland-session
 "
+
 PACKAGES="
 xf86-video-amdgpu
 vulkan-radeon mesa
@@ -45,8 +46,15 @@ kitty
 lazygit 
 python-lsp-server
 emacs
-nextcloud-client
-nextcloud-client-cloudproviders"
+stow
+"
+
+### install packages
+pacman -S --noconfirm --needed --overwrite \* $PACKAGES
+if [ $? -ne 0 ]; then
+  echo "Ocurrio in error instalando los paquetes."
+  exit 1
+fi
 
 ### install desktop
 pacman -S --noconfirm --needed --overwrite \* $DESKTOP
@@ -58,13 +66,6 @@ fi
 ### display manager
 systemctl enable sddm
 
-### install packages
-pacman -S --noconfirm --needed --overwrite \* $PACKAGES
-if [ $? -ne 0 ]; then
-  echo "Ocurrio in error instalando los paquetes."
-  exit 1
-fi
-
 ### libvirt config
 pacman -S libvirt iptables-nft dnsmasq dmidecode virt-manager qemu-full
 usermod -a -G libvirt jotix
@@ -74,10 +75,9 @@ systemctl start libvirtd.service
 ### qmk
 pacman -S qmk
 
-### copy arch-install
-mkdir -p /home/jotix/arch-install
-cp -rv ./* /home/jotix/arch-install/
-chown -R jotix /home/jotix/arch-install
+### copy arch-config
+cp -rv /root/arch-config /home/jotix/arch-config
+chown -R jotix /home/jotix/arch-config
 
 echo "
 
