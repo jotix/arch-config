@@ -64,4 +64,4 @@ git clone https://aur.archlinux.org/powerline-go.git
 flatpak install com.google.Chrome
 flatpak install com.spotify.Client
 flatpak install com.valvesoftware.Steam
-flatpak override --filesystem=/mnt/btrfs-vol-2 com.valvesoftware.Steam --user
+flatpak override --filesystem=/home/jotix/Steam com.valvesoftware.Steam --user
