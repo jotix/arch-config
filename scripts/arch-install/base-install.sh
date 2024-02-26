@@ -35,7 +35,7 @@ mount LABEL=jtx-system /mnt/mnt/swap -osubvol=arch/swap
 swapon /mnt/mnt/swap/swapfile
 
 ### install base system
-pacstrap /mnt base linux linux-firmware git neovim
+pacstrap /mnt base linux linux-firmware git neovim btrfs-progs
 
 ### generate fstab
 genfstab -U /mnt >> /mnt/etc/fstab
