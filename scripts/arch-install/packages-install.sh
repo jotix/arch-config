@@ -1,9 +1,3 @@
-DESKTOP="
-plasma
-kde-applications
-plasma-wayland-session
-"
-
 PACKAGES="
 xf86-video-amdgpu
 vulkan-radeon mesa
@@ -26,8 +20,7 @@ wl-clipboard
 flatpak 
 gst-libav
 firefox 
-libreoffice 
-gnucash 
+libreoffice  
 gimp 
 mpv 
 live-media
@@ -49,6 +42,12 @@ emacs
 stow
 "
 
+DESKTOP="
+plasma
+kde-applications
+"
+DISPLAYMANAGER="sddm"
+
 ### install packages
 pacman -S --noconfirm --needed --overwrite \* $PACKAGES
 if [ $? -ne 0 ]; then
@@ -64,7 +63,7 @@ if [ $? -ne 0 ]; then
 fi
 
 ### display manager
-systemctl enable sddm
+systemctl enable $DISPLAYMANAGER
 
 ### libvirt config
 pacman -S libvirt iptables-nft dnsmasq dmidecode virt-manager qemu-full
@@ -76,6 +75,8 @@ systemctl start libvirtd.service
 pacman -S qmk
 
 ### copy arch-config
+cd /root/arch-config
+git remote remove
 cp -rv /root/arch-config /home/jotix/arch-config
 chown -R jotix /home/jotix/arch-config
 
@@ -91,4 +92,3 @@ Login with jotix user
 Copy the jotix keys
 > cd /home/jotix/arch-install
 > ./jotix-install.sh"
-
