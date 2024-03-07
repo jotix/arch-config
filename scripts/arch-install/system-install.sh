@@ -27,11 +27,8 @@ sed -i "s/#$ES_AR/$ES_AR/g" /etc/locale.gen
 locale-gen
 
 echo 'LANG=en_US.UTF-8
-LC_NUMERIC=es_AR.UTF-8
-LC_TIME=es_AR.UTF-8
-LC_MONETARY=es_AR.UTF-8
-LC_PAPER=es_AR.UTF-8
-LC_MEASUREMENT=es_AR.UTF-8' > /etc/locale.conf
+LANGUAGE=en_US.UTF-8
+LC_ALL=es_AR.UTF-8' > /etc/locale.conf
 
 ### hostname
 echo $HOSTNAME > /etc/hostname
