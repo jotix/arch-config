@@ -20,6 +20,10 @@ Other less ideal solutions include disabling c-states in the BIOS or adding proc
 
 ** impresora Brother HL-1212W en Arch
 
+*** in KDE edit the connection in the setting panel
+ipp://192.168.0.7/ipp/port1
+
+*** manual config
 For network printers, use ipp://printer_ip/ipp/port1 as printer address.
 cambiar la direccion de la impresora en el gui del DE por la indicada arriba usando la IP de la impresora, (192.168.0.7)
 
