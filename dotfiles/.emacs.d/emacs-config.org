@@ -1,5 +1,5 @@
 #+AUTHOR: jotix
-XF#+TITLE: JOTIX emacs config.org
+#+TITLE: JOTIX emacs config.org
 #+DESCRIPTION: jotix's personal emacs config.
 #+STARTUP: overview
 #+PROPERTY: header-args :tangle ~/.emacs.d/init.el :mkdirp yes
