@@ -49,7 +49,8 @@ go install github.com/justjanne/powerline-go@latest
 
 flatpak install com.spotify.Client
 flatpak install com.valvesoftware.Steam
-flatpak override --filesystem=/home/jotix/Steam com.valvesoftware.Steam --user
+flatpak override --filesystem=/mnt/jtx-ssd com.valvesoftware.Steam --user
+flatpak override --filesystem=/mnt/jtx-nvme com.valvesoftware.Steam --user
 
 ######## KDE applications ######################################################
 
