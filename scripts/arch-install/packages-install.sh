@@ -1,6 +1,7 @@
 PACKAGES="
 xf86-video-amdgpu
-vulkan-radeon mesa
+vulkan-radeon 
+mesa
 pipewire pipewire-alsa 
 pipewire-pulse
 base-devel 
@@ -40,25 +41,16 @@ lazygit
 python-lsp-server
 emacs
 stow
+go
+plasma
 "
 
-DESKTOP="
-plasma
-kde-applications
-"
 DISPLAYMANAGER="sddm"
 
 ### install packages
 pacman -S --noconfirm --needed --overwrite \* $PACKAGES
 if [ $? -ne 0 ]; then
   echo "Ocurrio in error instalando los paquetes."
-  exit 1
-fi
-
-### install desktop
-pacman -S --noconfirm --needed --overwrite \* $DESKTOP
-if [ $? -ne 0 ]; then
-  echo "Ocurrio in error instalando el entorno de escritorio."
   exit 1
 fi
 
