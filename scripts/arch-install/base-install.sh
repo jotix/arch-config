@@ -46,13 +46,13 @@ pacstrap /mnt base linux linux-firmware git neovim btrfs-progs
 ### generate fstab
 genfstab -U /mnt >> /mnt/etc/fstab
 
-### copy arch-install scripts to the new installation
+### copy arch-config repo to the new installation
 cp -rv /root/arch-config /mnt/root/arch-config
 echo ''
 echo '-----------------------'
 echo 'run the commands'
 echo '> arch-chroot /mnt'
-echo '> cd /root/arch-config/scipts/rch-install'
+echo '> cd /root/arch-config/scipts/arch-install'
 echo 'nvim system-install'
 echo 'EDIT the variables'
 echo '> ./system-install.sh'
