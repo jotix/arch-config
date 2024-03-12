@@ -4,25 +4,11 @@
 ### run this script after installing the complete system and
 ### after install the gpg keys for acces the github repos
 
-####### copy jotix credentials #################################################
-
-sudo mkdir -p /mnt/Ventoy
-sudo mount LABEL=Ventoy /mnt/Ventoy
-cd /mnt/Ventoy/jotix
-chmod +x jotix-install.sh
-./jotix-install.sh
-cd $HOME
-
 ####### changing repo to arch-config ###########################################
 
 cd $HOME/arch-config
 git remote remove origin
 git remote add origin git@github.com:jotix/arch-config.git
-
-####### password-store #########################################################
-
-cd $HOME
-git clone git@github.com:jotix/.password-store.git ~/.password-store
 
 ########## QMK #################################################################
 
@@ -33,12 +19,6 @@ git remote add upstream https://github.com/qmk/qmk_firmware.git
 sudo cp util/udev/50-qmk.rules /etc/udev/rules.d/50-qmk.rules
 qmk setup
 cd $HOME
-
-####### syncthing ##############################################################
-
-sudo pacman -S syncthing
-systemctl enable syncthing.service --user
-systemctl start syncthing.service --user
 
 ####### powerline-go ###########################################################
 
@@ -54,5 +34,5 @@ flatpak override --filesystem=/mnt/jtx-nvme com.valvesoftware.Steam --user
 
 ######## KDE applications ######################################################
 
-sudo pacman -S kde-applications
+#sudo pacman -S kde-applications
 
