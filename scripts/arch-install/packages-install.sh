@@ -63,9 +63,6 @@ usermod -a -G libvirt jotix
 systemctl enable libvirtd.service
 systemctl start libvirtd.service
 
-### qmk
-pacman -S qmk
-
 ### copy arch-config
 cd /root/arch-config
 git remote remove
