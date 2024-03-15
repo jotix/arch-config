@@ -37,8 +37,10 @@ swapon /mnt/mnt/swap/swapfile
 ### mounting extra FS
 mkdir -p /mnt/mnt/jtx-nvme
 mkdir -p /mnt/mnt/jtx-ssd
+mkdir -p /mnt/mnt/jtx-system
 mount LABEL=jtx-nvme /mnt/mnt/jtx-nvme
-mount LABEL=jtx-ssd  /mnt/mnt/jtx-ssd
+mount LABEL=jtx-ssd /mnt/mnt/jtx-ssd
+mount LABEL=jtx-system /mnt/mnt/jtx-system
 
 ### install base system
 pacstrap /mnt base linux linux-firmware git neovim btrfs-progs
