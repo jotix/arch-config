@@ -57,12 +57,6 @@ fi
 ### display manager
 systemctl enable $DISPLAYMANAGER
 
-### libvirt config
-pacman -S libvirt iptables-nft dnsmasq dmidecode virt-manager qemu-full
-usermod -a -G libvirt jotix
-systemctl enable libvirtd.service
-systemctl start libvirtd.service
-
 ### copy arch-config
 cd /root/arch-config
 git remote remove
