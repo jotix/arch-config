@@ -1,0 +1,278 @@
+#+AUTHOR: jotix
+#+TITLE: JOTIX dotfiles
+#+DESCRIPTION: jotix's dotfiles
+#+STARTUP: overview
+#+PROPERTY: header-args :tangle ~/.emacs.d/init.el :mkdirp yes
+#+auto_tangle: t
+
+* bashrc
+#+begin_src sh :tangle ~/.bashrc
+#
+# ~/.bashrc
+#
+
+test -s ~/.alias && . ~/.alias || true
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+export EDITOR=nvim
+export VISUAL=nvim
+export PATH=$PATH:~/.local/bin:~/.scripts
+export GOPATH=~/go
+
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+
+alias exa='exa --icons'
+alias la='exa -lha'
+alias l=la
+alias ll='exa -l'
+alias ls=exa
+alias lt='exa --tree'
+
+### cd to config folder
+alias cdc='cd ~/jtx-config'
+
+### alias vim to emacs -nw
+alias vim=nvim
+alias vi=nvim
+
+function _update_ps1() {
+    PS1="$($GOPATH/bin/powerline-go -error $? -jobs $(jobs -p | wc -l))"
+
+    # Uncomment the following line to automatically clear errors after showing
+    # them once. This not only clears the error for powerline-go, but also for
+    # everything else you run in that shell. Don't enable this if you're not
+    # sure this is what you want.
+
+    #set "?"
+}
+
+if [ "$TERM" != "linux" ] && [ -f "$GOPATH/bin/powerline-go" ]; then
+    PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
+fi
+
+fastfetch
+#+end_src
+* digikam geobookmarks
+#+begin_src xml :tangle ~/.local/share/digikam
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xbel>
+<xbel version="1.0">
+    <bookmark href="geo:-34.5334696098,-58.7182545881" added="2023-09-23T12:51:09">
+        <title>Muñoz 2377, San Miguel</title>
+    </bookmark>
+    <bookmark href="geo:-31.7646373793,-64.4639512763" added="2023-09-23T12:54:08">
+        <title>Sierras de Cordoba</title>
+    </bookmark>
+    <bookmark href="geo:-34.5429183164,-58.6934373908" added="2023-09-23T12:56:59">
+        <title>Rosetti 510, Muñiz</title>
+    </bookmark>
+    <bookmark href="geo:-34.5451636179,-58.7247310212" added="2023-09-23T20:28:36">
+        <title>Roque Saenz Peña 1948</title>
+    </bookmark>
+    <bookmark href="geo:-34.6605514033,-61.0181997348" added="2024-03-24T15:17:38">
+        <title>laguna de junin</title>
+    </bookmark>
+</xbel>
+#+end_src
+* git
+#+begin_src conf :tangle ~/.config/git/config
+[init]	
+defaultBranch = "main"
+
+[user]
+email = "jujodeve@gmail.com"
+name = "jotix"
+#+end_src
+* helix
+#+begin_src toml :tangle ~/.config/helix/config.toml
+theme = "tokyonight_storm"
+
+[editor]
+line-number = "relative"
+
+[keys.normal]
+esc = ["collapse_selection", "keep_primary_selection"]
+
+[editor.file-picker]
+hidden = false
+#+end_src
+* kitty
+#+begin_src conf :tangle ~/.config/kitty/kitty.conf
+font_family Jetbrains Mono
+font_size 10
+
+# Shell integration is sourced and configured manually
+shell_integration no-rc enabled
+
+map ctrl+, change_font_size all -2.0
+map ctrl+. change_font_size all +2.0
+map ctrl+left next_tab
+map ctrl+right previous_tab
+map ctrl+t new_tab_with_cwd
+map ctrl+w close_tab
+
+confirm_os_window_close 0
+#+end_src
+* neovim
+#+begin_src lua :tangle ~/.config/nvim/init.lua
+-- editor config ---------------------------------------------------------------
+vim.opt.number = true
+vim.opt.relativenumber = true
+
+vim.opt.tabstop = 4
+vim.opt.softtabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.expandtab = true
+vim.opt.smartindent = true
+
+vim.opt.wrap = true
+
+vim.opt.swapfile = false
+vim.opt.backup = false
+vim.opt.undodir = os.getenv("HOME") .. "/.cache/nvim/undodir"
+vim.opt.undofile = true
+
+vim.opt.hlsearch = true
+vim.opt.incsearch = true
+
+vim.opt.termguicolors = true
+
+vim.opt.scrolloff = 8
+vim.opt.signcolumn = "yes"
+vim.opt.isfname:append("@-@")
+
+vim.opt.updatetime = 50
+
+vim.opt.colorcolumn = "80"
+
+-- keybindings -----------------------------------------------------------------
+vim.g.mapleader = " "
+vim.keymap.set("n", "<leader>e", vim.cmd.Ex)
+
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+
+vim.keymap.set("n", "<leader>y", "\"+y")
+vim.keymap.set("v", "<leader>y", "\"+y")
+vim.keymap.set("n", "<leader>Y", "\"+Y")
+
+-- bootstrap lazy.nvim ---------------------------------------------------------
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
+
+-- plugings --------------------------------------------------------------------
+require("lazy").setup({
+    "nvim-lualine/lualine.nvim",
+    "nvim-telescope/telescope.nvim",
+    "nvim-lua/plenary.nvim",
+    "nvim-treesitter/nvim-treesitter",
+    "mbbill/undotree",
+    --"preservim/nerdtree",
+    "akinsho/toggleterm.nvim",
+    {
+        "folke/tokyonight.nvim",
+        lazy = false,
+        priority = 1000,
+        opts = {},
+    },
+    "LnL7/vim-nix",
+    {
+        {'VonHeikemen/lsp-zero.nvim', branch = 'v3.x'},
+
+        --- Uncomment these if you want to manage LSP servers from neovim
+        -- {'williamboman/mason.nvim'},
+        -- {'williamboman/mason-lspconfig.nvim'},
+
+        -- LSP Support
+        {
+            'neovim/nvim-lspconfig',
+            dependencies = {
+                {'hrsh7th/cmp-nvim-lsp'},
+            },
+        },
+
+        -- Autocompletion
+        {
+            'hrsh7th/nvim-cmp',
+            dependencies = {
+                {'L3MON4D3/LuaSnip'},
+            }
+        }
+    }
+})
+
+-- plugins configurations ------------------------------------------------------
+
+-- color theme
+vim.cmd[[colorscheme tokyonight]]
+
+-- lualine
+require('lualine').setup {
+    options = {
+        theme = 'tokyonight',
+    },
+}
+
+-- telescope
+local builtin = require('telescope.builtin')
+vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
+vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
+
+-- treesitter
+require'nvim-treesitter.configs'.setup {
+    -- A list of parser names, or "all" (the five listed parsers should always be installed)
+    ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "python" },
+
+    -- Install parsers synchronously (only applied to `ensure_installed`)
+    sync_install = false,
+
+    -- Automatically install missing parsers when entering buffer
+    -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
+    auto_install = true,
+
+    highlight = {
+        enable = true,
+
+        -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+        -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+        -- Using this option may slow down your editor, and you may see some duplicate highlights.
+        -- Instead of true it can also be a list of languages
+        additional_vim_regex_highlighting = false,
+    },
+}
+
+-- undotree 
+vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle)
+
+-- nerdtree
+--vim.keymap.set("n", "<leader>n", ":NERDTreeFocus<CR>")
+--vim.keymap.set("n", "<C-n>", ":NERDTreeToggle<CR>")
+
+-- toggleterm
+require'toggleterm'.setup {
+    direction = "float",
+    open_mapping = [[<C-t>]],
+}
+vim.keymap.set("n", "<leader>t", ":ToggleTerm<CR>")
+
+-- lsp-zero
+local lsp_zero = require('lsp-zero')
+lsp_zero.on_attach(function(client, bufnr)
+  -- see :help lsp-zero-keybindings
+  -- to learn the available actions
+  lsp_zero.default_keymaps({buffer = bufnr})
+end)
+#+end_src

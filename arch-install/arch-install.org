@@ -1,0 +1,68 @@
+
+# localectl list-keymaps
+# loadkeys es
+# setfont ter-132b
+
+# timedatectl
+
+* repare de partitions
+#+begin_src sh
+# cgdisk /dev/nvme0n1
+# mkfs.btrfs /dev/nvme0n1p1 -L jtx-system
+# mkfs.vfat -F32 /dev/nvme0n1p1 -n JTX-EFI
+# mount LABEL=jtx-system /mnt
+# btrfs subvolume create /mnt/arch
+# btrfs subvolume create /mnt/arch/root
+# btrfs subvolume create /mnt/arch/home
+# umount -R /mnt
+#+end_src
+
+# mount LABEL=jtx-system /mnt -osubvol=/arch/root
+# mkdir -p /mnt/home
+# mkdir -p /mnt/boot/efi
+# mount LABEL=jtx-system /mnt -osubvol=/arch/root
+# mount LABEL=JTX-EFI /mnt/boot/efi
+
+# mkswap -U clear –size 4G –file /mnt/swapfile
+# swapon /mnt/swapfile
+
+# nvim /etc/pacman.conf
+---enable parallel downloads
+
+# pacstrap /mnt base linux linux-firmware
+
+# genfstab -U /mnt » /mnt/etc/fstab
+
+# arch-chroot /mnt
+
+# ln -sf /usr/share/zoneinfo/America/Argentina/Buenos_Aires /etc/localtime
+# hwclock –systohs
+
+# nvim /etc/locale.gen
+---uncoment en_US.UTF-8
+---uncoment es_AR.UTF-8
+# locale-gen
+
+# nvim /etc/locale.conf
+LANG=en_US.UTF-8
+# nvim /etc/hostname
+jtx-arch
+
+# pacman -S grub efibootmgr sudo networkmanager ntp unzip amd-ucode dosfstools ntf-3g exfatprogs btrfs-progs
+
+# grub-install –target=x86_64-efi –efi-directory=/boot/efi –bootloader-id=Arch-Grub
+# grub-mkconfig -o /boot/grub/grub/cfg
+# nvim /etc/sudoers
+---uncoment
+%wheel ALL=(ALL:ALL) ALL
+
+# passwd
+# useradd -m -G whell -s /bin/bash jotix
+# passwd jotix
+
+# systemctl enable NetworkManager
+# systemctl enable ntpdate
+# systemctl enable fstrim.timer
+
+# pacman -S plasma kitty
+# systemctl enable sddm

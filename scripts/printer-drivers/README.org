@@ -1,0 +1,6 @@
+* Linux Printer drivers
+
+** Xprinter XP58
+make the file executable and run it as root
+** Brother HL-1212W
+Arch AUR package
