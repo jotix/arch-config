@@ -337,16 +337,16 @@
 #+end_src
 ** treemacs
 #+begin_src emacs-lisp
-(use-package treemacs)
+;;(use-package treemacs)
 #+end_src
 ** golden-ratio
 #+begin_src emacs-lisp
 ;; golden ratio
-(use-package golden-ratio
-  :ensure t
-  :hook (after-init . golden-ratio-mode)
-  :custom
-  (golde-ratio-exclude-modes '(occur-mode)))
+;; (use-package golden-ratio
+;;   :ensure t
+;;   :hook (after-init . golden-ratio-mode)
+;;   :custom
+;;   (golde-ratio-exclude-modes '(occur-mode)))
 #+end_src
 ** lua-mode
 #+begin_src emacs-lisp
@@ -619,6 +619,7 @@
 (global-set-key (kbd "C-x b") 'consult-buffer)
 (global-set-key (kbd "C-x C-b") 'consult-buffer)
 (global-set-key (kbd "C-x d") #'(lambda () (interactive) (dired ".")))
+;;(global-set-key (kbd "C-x C-f") #'(lambda () (interactive) (find-file "./")))
 #+end_src
 ** window movement
 #+begin_src emacs-lisp
@@ -663,5 +664,77 @@ colorscript -e pacman
 (set-frame-size (selected-frame) 220 50)
 
 ;; start fullscreen
-;; (add-hook 'emacs-startup-hook 'toggle-frame-maximized)
+(add-hook 'emacs-startup-hook 'toggle-frame-maximized)
 #+end_src
+* exwm
+#+begin_src emacs-lisp
+(use-package exwm)
+(use-package dmenu)
+(require 'exwm)
+;;(require 'exwm-config)
+;;(exwm-config-example)
+(defun jtx/exwm-config ()
+  "Default configuration of EXWM."
+  ;; Set the initial workspace number.
+  (unless (get 'exwm-workspace-number 'saved-value)
+    (setq exwm-workspace-number 4))
+  ;; Make class name the buffer name
+  (add-hook 'exwm-update-class-hook
+            (lambda ()
+              (exwm-workspace-rename-buffer exwm-class-name)))
+
+  (require 'exwm-systemtray)
+  (exwm-systemtray-enable)
+  
+  ;; Global keybindings.
+  (unless (get 'exwm-input-global-keys 'saved-value)
+    (setq exwm-input-global-keys
+          `(
+            ;; 's-r': Reset (to line-mode).
+            ([?\s-r] . exwm-reset)
+            ;; 's-w': Switch workspace.
+            ([?\s-w] . exwm-workspace-switch)
+            ;; 's-&': Launch application.
+            ([?\s-&] . (lambda (command)
+                         (interactive (list (read-shell-command "$ ")))
+                         (start-process-shell-command command nil command)))
+	    ;; dmenu
+	    ([?\s-d] . dmenu)
+            ;; 's-N': Switch to certain workspace.
+            ,@(mapcar (lambda (i)
+                        `(,(kbd (format "s-%d" i)) .
+                          (lambda ()
+                            (interactive)
+                            (exwm-workspace-switch-create ,i))))
+                      (number-sequence 0 9)))))
+  ;; Line-editing shortcuts
+  (unless (get 'exwm-input-simulation-keys 'saved-value)
+    (setq exwm-input-simulation-keys
+          '(([?\C-b] . [left])
+            ([?\C-f] . [right])
+            ([?\C-p] . [up])
+            ([?\C-n] . [down])
+            ([?\C-a] . [home])
+            ([?\C-e] . [end])
+            ([?\M-v] . [prior])
+            ([?\C-v] . [next])
+            ([?\C-d] . [delete])
+            ([?\C-k] . [S-end delete]))))
+  ;; Enable EXWM
+  (exwm-enable))
+
+;;(exwm-input-set-key (kbd "s-d") 'dmenu)
+
+(jtx/exwm-config)
+
+(use-package pinentry
+  :ensure t
+  :config
+  (pinentry-start) )
+
+#+end_src
+** xinitrc
+#+begin_src sh :tangle  ~/.xinitrc
+exec emacs
+#+end_src
+

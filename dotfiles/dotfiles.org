@@ -32,7 +32,7 @@ alias ls=exa
 alias lt='exa --tree'
 
 ### cd to config folder
-alias cdc='cd ~/jtx-config'
+alias cdc='cd ~/arch-config'
 
 ### alias vim to emacs -nw
 alias vim=nvim
