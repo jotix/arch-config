@@ -352,6 +352,16 @@
 #+begin_src emacs-lisp
 (use-package lua-mode)
 #+end_src
+** bluetooth
+#+begin_src emacs-lisp
+(use-package bluetooth)
+#+end_src
+** pulseaudio-control
+#+begin_src emacs-lisp
+(use-package pulseaudio-control
+  :config
+  (pulseaudio-control-default-keybindings))
+#+end_src
 * programming
 #+begin_src emacs-lisp
 (add-hook 'prog-mode-hook 'eglot-ensure)
