@@ -9,7 +9,6 @@ xorg
 xorg-xinit
 xorg-xrandr
 xf86-video-amdgpu
-vulkan
 vulkan-radeon
 pipewire
 xfce4
@@ -26,6 +25,7 @@ bat
 fastfetch
 git
 firefox
+ttf-jetbrains-mono
 "
 
 sudo pacman -S --needed --noconfirm $PACKAGES
