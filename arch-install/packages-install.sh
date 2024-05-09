@@ -28,6 +28,10 @@ fastfetch
 git
 firefox
 ttf-jetbrains-mono
+nerd-fonts
+pipewire
+pipewire-alsa
+pipewire-pulse
 "
 
 sudo pacman -S --needed --noconfirm $PACKAGES

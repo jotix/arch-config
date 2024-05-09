@@ -3,7 +3,7 @@
 #+DESCRIPTION: jotix's hyprland config files
 #+STARTUP: overview
 #+PROPERTY: header-args :tangle ~/.emacs.d/init.el :mkdirp yes
-#+auto_tangle: nil
+#+auto_tangle: t
 
 * hypridle
 #+begin_src conf :tangle ~/.config/hypr/hypridle.conf
@@ -47,8 +47,7 @@ listener {
 #+begin_src conf :tangle ~/.config/hypr/hyprland.conf
 # See https://wiki.hyprland.org/Configuring/Monitors/
 
-#monitor=,preferred,auto,auto
-monitor = HDMI-A-1,disable
+monitor=,preferred,auto,auto
 
 # See https://wiki.hyprland.org/Configuring/Keywords/ for more
 
@@ -259,7 +258,7 @@ input-field {
 #+begin_src conf :tangle ~/.config/hypr/hyprpaper.conf
 preload = ~/.config/hypr/wallpaper.jpg
 
-wallpaper = DP-1, ~/.config/hypr/wallpaper.jpg
+wallpaper = HDMI-A-1, ~/.config/hypr/wallpaper.jpg
 #+end_src
 * waybar
 ** config
