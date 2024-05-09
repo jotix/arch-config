@@ -112,6 +112,8 @@ passwd jotix
 
 * final steps
 #+begin_src
+pacman -S git p7zip neovim
+
 systemctl enable fstrim.timer
 exit
 

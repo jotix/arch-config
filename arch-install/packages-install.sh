@@ -18,6 +18,8 @@ p7zip
 emacs
 libvterm
 libtool
+base-devel
+cmake
 bluez
 bluez-utils
 exa
