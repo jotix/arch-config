@@ -3,6 +3,10 @@
 #+DESCRIPTION: jotix's arch install intructions
 #+STARTUP: overview
 
+* prepare the USB drive
+#+begin_src sh
+dd bs=4M if=path/to/archlinux-version-x86_64.iso of=/dev/disk/by-id/usb-My_flash_drive conv=fsync oflag=direct status=progress
+#+end_src
 * configure the keyboard
 #+begin_src sh
 localectl list-keymaps
