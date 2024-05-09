@@ -17,6 +17,18 @@ xfce4-goodies
 unzip
 p7zip
 emacs
+libvterm
+libtool
+bluez
+bluez-utils
+exa
+bat
+fastfetch
+git
+firefox
 "
 
 sudo pacman -S --needed --noconfirm $PACKAGES
+sudo systemctl enable bluetooth.service
+sudo systemctl start bluetooth.service
+
