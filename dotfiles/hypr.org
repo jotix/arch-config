@@ -2,7 +2,7 @@
 #+TITLE: JOTIX hyprland config
 #+DESCRIPTION: jotix's hyprland config files
 #+STARTUP: overview
-#+PROPERTY: header-args :tangle ~/.emacs.d/init.el :mkdirp yes
+#+PROPERTY: header-args :mkdirp yes
 #+auto_tangle: t
 
 * hypridle
