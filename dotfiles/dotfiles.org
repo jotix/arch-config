@@ -276,3 +276,9 @@ lsp_zero.on_attach(function(client, bufnr)
   lsp_zero.default_keymaps({buffer = bufnr})
 end)
 #+end_src
+* xinitrc
+#+begin_src sh :tangle  ~/.xinitrc
+setxkbmap es
+picom &
+exec emacs --load ~/.emacs.d/exwm.el
+#+end_src

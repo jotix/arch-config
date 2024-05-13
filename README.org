@@ -38,7 +38,7 @@ mkdir -p /mnt/boot/efi
 mount LABEL=jtx-system /mnt -osubvol=/arch/root
 mount LABEL=JTX-EFI /mnt/boot/efi
 
-mkswap -U clear –size 4G –file /mnt/swapfile
+mkswap -U clear --size 4G --file /mnt/swapfile
 swapon /mnt/swapfile
 #+end_src
 
@@ -50,7 +50,7 @@ nvim /etc/pacman.conf
 
 * install the base system
 #+begin_src 
-pacstral /mnt base linux linux-firmware
+pacstrap /mnt base linux linux-firmware
 #+end_src
 
 * generate the fstab file
@@ -112,7 +112,7 @@ passwd jotix
 
 * final steps
 #+begin_src
-pacman -S git p7zip neovim
+pacman -S git p7zip neovim openssh
 
 systemctl enable fstrim.timer
 exit

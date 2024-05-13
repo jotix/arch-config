@@ -10,11 +10,9 @@ xorg-xinit
 xorg-xrandr
 xf86-video-amdgpu
 vulkan-radeon
-pipewire
 xfce4
 xfce4-goodies
 unzip
-p7zip
 emacs
 libvterm
 libtool
@@ -25,13 +23,14 @@ bluez-utils
 exa
 bat
 fastfetch
-git
 firefox
 ttf-jetbrains-mono
 nerd-fonts
 pipewire
 pipewire-alsa
 pipewire-pulse
+pavucontrol
+picom
 "
 
 sudo pacman -S --needed --noconfirm $PACKAGES
