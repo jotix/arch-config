@@ -710,49 +710,16 @@ colorscript -e pacman
 (require 'exwm-systemtray)
 (exwm-systemtray-enable)
 
-;; Global keybindings.
-(unless (get 'exwm-input-global-keys 'saved-value)
-  (setq exwm-input-global-keys
-	`(
-	  ;; 's-r': Reset (to line-mode).
-	  ([?\s-r] . exwm-reset)
-	  ;; 's-w': Switch workspace.
-	  ([?\s-w] . exwm-workspace-switch)
-	  ;; 's-&': Launch application.
-	  ([?\s-&] . (lambda (command)
-		       (interactive (list (read-shell-command "$ ")))
-		       (start-process-shell-command command nil command)))
-	  ;; dmenu
-	  ([?\s-d] . dmenu)
-	  ;; 's-N': Switch to certain workspace.
-	  ,@(mapcar (lambda (i)
-		      `(,(kbd (format "s-%d" i)) .
-			(lambda ()
-			  (interactive)
-			  (exwm-workspace-switch-create ,i))))
-		    (number-sequence 0 9)))))
-
-;; Line-editing shortcuts
-(unless (get 'exwm-input-simulation-keys 'saved-value)
-  (setq exwm-input-simulation-keys
-	'(([?\C-b] . [left])
-	  ([?\C-f] . [right])
-	  ([?\C-p] . [up])
-	  ([?\C-n] . [down])
-	  ([?\C-a] . [home])
-	  ([?\C-e] . [end])
-	  ([?\M-v] . [prior])
-	  ([?\C-v] . [next])
-	  ([?\C-d] . [delete])
-	  ([?\C-k] . [S-end delete]))))
-
 ;; bypass C-z
 (add-to-list 'exwm-input-prefix-keys 26)
 
+(define-key exwm-mode-map (kbd "C-z d") 'dmenu)
 (define-key exwm-mode-map (kbd "<XF86AudioLowerVolume>") 'jtx/lower-volume)
 (define-key exwm-mode-map (kbd "<XF86AudioRaiseVolume>") 'jtx/raise-volume)
 (define-key exwm-mode-map (kbd "<XF86AudioMute>") 'jtx/mute-volume)
+
 (exwm-enable)
+(dashboard-open)
 #+end_src
 
 
