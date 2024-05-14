@@ -278,7 +278,17 @@ end)
 #+end_src
 * xinitrc
 #+begin_src sh :tangle  ~/.xinitrc
-setxkbmap es
+case $HOSTNAME in
+    jtx-arch)
+	setxkbmap us
+	;;
+    ffm-arch)
+	setxkbmap es
+	;;
+esac
+
 picom &
-exec emacs --load ~/.emacs.d/exwm.el
+emacs --daemon -f exwm-enable
+exec emacsclient -c
+#exec emacs -fs
 #+end_src
