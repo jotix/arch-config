@@ -167,14 +167,14 @@
   (setq vertico-resize nil)
   (vertico-mode 1))
 
-;; (use-package vertico-posframe
-;;   :ensure t
-;;   :config
-;;   (vertico-posframe-mode nil)
-;;   :custom
-;;   (vertico-posframe-parameters
-;;    '((left-fringe . 8)
-;;      (right-fringe . 8))))
+(use-package vertico-posframe
+  :ensure t
+  :config
+  (vertico-posframe-mode nil)
+  :custom
+  (vertico-posframe-parameters
+   '((left-fringe . 8)
+     (right-fringe . 8))))
 
 (use-package marginalia
   :config
@@ -616,8 +616,8 @@
 #+begin_src emacs-lisp
 ;; Make dired open in the same window when using RET or ^
 (put 'dired-find-alternate-file 'disabled nil) ; disables warning
-(define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file) ; was dired-advertised-find-file
-(define-key dired-mode-map (kbd "^") #'(lambda () (interactive) (find-alternate-file "..")))  ; was dired-up-directory
+;; (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file) ; was dired-advertised-find-file
+;; (define-key dired-mode-map (kbd "^") #'(lambda () (interactive) (find-alternate-file "..")))  ; was dired-up-directory
 #+end_src
 * eshell
 ** hooks
@@ -737,7 +737,7 @@ colorscript -e pacman
 	(,(kbd "<XF86AudioRaiseVolume>") . jtx/raise-volume)
 	(,(kbd "<XF86AudioMute>") . jtx/mute-volume)))
 
-(exwm-enable)
+;;(exwm-enable)
 #+end_src
 
 
