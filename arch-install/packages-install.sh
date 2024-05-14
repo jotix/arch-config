@@ -13,6 +13,8 @@ xf86-video-amdgpu
 vulkan-radeon
 xfce4
 xfce4-goodies
+pop-gtk-theme
+pop-icon-theme
 unzip
 emacs
 libvterm
