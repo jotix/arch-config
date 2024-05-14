@@ -5,6 +5,7 @@ exfatprogs
 ntfs-3g
 dosfstools
 btrfs-progs
+os-prober
 xorg
 xorg-xinit
 xorg-xrandr
@@ -31,6 +32,7 @@ pipewire-alsa
 pipewire-pulse
 pavucontrol
 picom
+ghostscript
 "
 
 sudo pacman -S --needed --noconfirm $PACKAGES
