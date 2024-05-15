@@ -453,6 +453,11 @@
 (global-set-key (kbd "C-x d") #'(lambda () (interactive) (dired ".")))
 ;;(global-set-key (kbd "C-x C-f") #'(lambda () (interactive) (find-file "./")))
 
+(define-key org-mode-map (kbd "M-<left>") 'windmove-left)
+(define-key org-mode-map (kbd "M-<right>") 'windmove-right)
+(define-key org-mode-map (kbd "M-<up>") 'windmove-up)
+(define-key org-mode-map (kbd "M-<down>") 'windmove-down)
+
 (global-set-key (kbd "M-<left>") 'windmove-left)
 (global-set-key (kbd "M-<right>") 'windmove-right)
 (global-set-key (kbd "M-<up>") 'windmove-up)

@@ -581,6 +581,11 @@
 #+end_src
 ** window movement
 #+begin_src emacs-lisp
+(define-key org-mode-map (kbd "M-<left>") 'windmove-left)
+(define-key org-mode-map (kbd "M-<right>") 'windmove-right)
+(define-key org-mode-map (kbd "M-<up>") 'windmove-up)
+(define-key org-mode-map (kbd "M-<down>") 'windmove-down)
+
 (global-set-key (kbd "M-<left>") 'windmove-left)
 (global-set-key (kbd "M-<right>") 'windmove-right)
 (global-set-key (kbd "M-<up>") 'windmove-up)
@@ -606,9 +611,9 @@
 #+begin_src sh :tangle ./eshell/alias
 alias exa exa --icons --group-directories-first --header $*
 alias ls exa $*
-alias l exa -hl $*
+alias ll exa -hl $*
 alias la exa -ha $*
-alias ll exa -hla $*
+alias l exa -hla $*
 
 alias ff find-file $1
 
