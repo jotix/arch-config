@@ -16,8 +16,7 @@
 #+end_src
 * emacs-config-path
 #+begin_src emacs-lisp
-(setq jtx-emacs-config-file "~/.emacs.d/emacs-config.org")
-(add-to-list 'default-frame-alist '(fullscreen . maximized))
+(setq jtx-emacs-config-file "~/arhc-config/dotfiles/emacs-config.org")
 #+end_src
 * qol/editing
 ** yes-or-no
@@ -79,7 +78,7 @@
 (setq global-auto-revert-non-file-buffers t)
 
 ;; undo-history files location
-(setq undo-tree-history-directory-alist '(("." . "~/.config/emacs/undo")))
+(setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo")))
 
 ;; avoid confirmation for closinbg a buffer with a running process 
 (setq kill-buffer-query-functions (delq 'process-kill-buffer-query-function kill-buffer-query-functions))
@@ -117,7 +116,9 @@
 (tooltip-mode -1)
 (set-fringe-mode 10)
 (menu-bar-mode -1)
-(display-time-mode)
+(setq display-time-format "%d %b - %H:%M")
+(setq display-time-day-and-date t)
+(display-time-mode 1)
 
 ;; set up the visible bell
 (setq visible-bell t)
@@ -138,10 +139,12 @@
 
   (set-face-attribute 'font-lock-keyword-face nil
 		      :slant 'italic))
+(jtx/set-font-faces)
 #+end_src
-** all the icons
+** fullscreen
 #+begin_src emacs-lisp
-
+(set-frame-parameter (selected-frame) 'fullscreen 'maximized)
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
 #+end_src
 * packages
 ** initialize repos
@@ -200,50 +203,27 @@
   (setq dashboard-display-icons-p t) 
   (setq dashboard-icon-type 'nerd-icons))
 #+end_src
+** themes / fonts icons
+#+begin_src emacs-lisp
+(use-package spacemacs-theme
+  :config
+  (load-theme 'spacemacs-dark t))
 
-** nerd-icons
-#+begin_src emacs-lisp
+(use-package spaceline
+  :config
+  (spaceline-spacemacs-theme))
+
 (use-package nerd-icons)
-#+end_src
-** all-the-icons
-#+begin_src emacs-lisp
+
+(use-package all-the-icons-dired)
+
 (use-package all-the-icons
   :hook
   (dired-mode . all-the-icons-dired-mode))
 #+end_src
-** all-the-icons-dired
-#+begin_src emacs-lisp
-(use-package all-the-icons-dired)
-#+end_src
-** themes
-#+begin_src emacs-lisp
-(use-package spacemacs-theme)
-(use-package spaceline)
-
-;; (use-package doom-themes
-;;   :ensure t
-;;   :config
-;;   ;; Global settings (defaults)
-;;   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
-;;         doom-themes-enable-italic t) ; if nil, italics is universally disabled
-;;   (load-theme 'doom-tokyo-night t)
-
-;;   ;; Enable flashing mode-line on errors
-;;   (doom-themes-visual-bell-config)
-;;   ;; Enable custom neotree theme (all-the-icons must be installed!)
-;;   (doom-themes-neotree-config)
-;;   ;; or for treemacs users
-;;   (setq doom-themes-treemacs-theme "doom-atom") ; use "doom-colors" for less minimal icon theme
-;;   (doom-themes-treemacs-config)
-;;   ;; Corrects (and improves) org-mode's native fontification.
-;;   (doom-themes-org-config))
-
-;; (use-package doom-modeline
-;;   :init (doom-modeline-mode 1))
-#+end_src
 ** vterm
 #+begin_src emacs-lisp
-(use-package vterm)
+;;(use-package vterm)
 #+end_src
 ** rainbow-delimiters
 #+begin_src emacs-lisp
@@ -272,7 +252,7 @@
 #+end_src
 ** nix-mode
 #+begin_src emacs-lisp
-(use-package nix-mode)
+;;(use-package nix-mode)
 #+end_src
 ** undo-tree
 #+begin_src emacs-lisp
@@ -300,11 +280,13 @@
 #+begin_src emacs-lisp
 (use-package magit)
 #+end_src
-** eshell-git-prompt
+** eshell packages
 #+begin_src emacs-lisp
 (use-package eshell-git-prompt
   :config
   (eshell-git-prompt-use-theme 'multiline2))
+
+(use-package eshell-info-banner)
 #+end_src
 ** company
 #+begin_src emacs-lisp
@@ -321,16 +303,7 @@
 #+end_src
 ** treemacs
 #+begin_src emacs-lisp
-(use-package treemacs)
-#+end_src
-** golden-ratio
-#+begin_src emacs-lisp
-;; golden ratio
-;; (use-package golden-ratio
-;;   :ensure t
-;;   :hook (after-init . golden-ratio-mode)
-;;   :custom
-;;   (golde-ratio-exclude-modes '(occur-mode)))
+;;(use-package treemacs)
 #+end_src
 ** lua-mode
 #+begin_src emacs-lisp
@@ -632,18 +605,20 @@
 #+begin_src sh :tangle ~/.emacs.d/eshell/alias
 alias exa exa --icons --group-directories-first --header $*
 alias ls exa $*
-alias ll exa -hl $*
+alias l exa -hl $*
 alias la exa -ha $*
-alias lla exa -hla $*
+alias ll exa -hla $*
 
-alias ff find-file $1 
+alias ff find-file $1
+
+alias cdc cd ~/arch-config
 #+end_src
 ** profile
 #+begin_src sh :tangle ~/.emacs.d/eshell/profile
-colorscript -e pacman
+eshell-info-banner
 #+end_src
 
-* daemon hook
+* daemon theme hook
 #+begin_src emacs-lisp
 (if (daemonp)
     (add-hook 'after-make-frame-functions
@@ -653,38 +628,13 @@ colorscript -e pacman
 		  (progn
 		    (jtx/set-font-faces)
 		    (spaceline-spacemacs-theme)
-		    (load-theme 'spacemacs-dark t)
-		    (dashboard-open)))))
+		    (load-theme 'spacemacs-dark t))))
   (progn
     (jtx/set-font-faces)
     (spaceline-spacemacs-theme)
-    (load-theme 'spacemacs-dark t)
-    (dashboard-open)))
-
-
-;; (if (daemonp)
-;;     (add-hook 'after-make-frame-functions
-;; 	      (lambda (frame)
-;; 		(with-selected-frame frame
-;; 		  (jtx/set-font-faces))))
-;;   (jtx/set-font-faces))
-
-;; (if (daemonp)
-;;     (add-hook 'after-make-frame-functions
-;; 	      (lambda (frame)
-;; 		(spaceline-spacemacs-theme)))
-;;   (spaceline-spacemacs-theme))
-
-;; (if (daemonp)
-;;     (add-hook 'after-make-frame-functions
-;;               (lambda (frame)
-;;                 (load-theme 'spacemacs-dark t)))
-;;     (load-theme 'spacemacs-dark t))
-
-;; start fullscreen
-;;(add-hook 'emacs-startup-hook 'toggle-frame-maximized)
+    (load-theme 'spacemacs-dark t))))
 #+end_src
-* emacs desktop
+* emacs desktop environment
 ** extra packages
 #+begin_src emacs-lisp
 (use-package dmenu)
@@ -712,32 +662,60 @@ colorscript -e pacman
 #+end_src
 ** exwm config
 #+begin_src emacs-lisp 
-(use-package exwm)
+(use-package exwm
+  :config
+  
+  ;; Set the initial workspace number.
+  (unless (get 'exwm-workspace-number 'saved-value)
+    (setq exwm-workspace-number 4))
 
-;; Set the initial workspace number.
-(unless (get 'exwm-workspace-number 'saved-value)
-  (setq exwm-workspace-number 4))
+  ;; Make class name the buffer name
+  (add-hook 'exwm-update-class-hook
+	    (lambda ()
+	      (exwm-workspace-rename-buffer exwm-class-name)))
 
-;; Make class name the buffer name
-(add-hook 'exwm-update-class-hook
-	  (lambda ()
-	    (exwm-workspace-rename-buffer exwm-class-name)))
+  (require 'exwm-systemtray)
+  (exwm-systemtray-enable)
 
-(require 'exwm-systemtray)
-(exwm-systemtray-enable)
+    ;; These keys should always pass through to Emacs
+  (setq exwm-input-prefix-keys
+    '(?\C-x
+      ?\C-z
+      ?\C-u
+      ?\C-h
+      ?\M-x
+      ?\M-`
+      ?\M-&
+      ?\M-:
+      ?\C-\M-j  ;; Buffer list
+      ?\C-\ ))  ;; Ctrl+Space
 
-;; bypass C-z
-(add-to-list 'exwm-input-prefix-keys 26)
+  (setq exwm-input-global-keys
+	`((,(kbd "s-r") . exwm-reset)
+	  (,(kbd "s-w") . exwm-workspace-switch)
+	  (,(kbd "C-z d") . dmenu)
+	  (,(kbd "<XF86AudioLowerVolume>") . jtx/lower-volume)
+	  (,(kbd "<XF86AudioRaiseVolume>") . jtx/raise-volume)
+	  (,(kbd "<XF86AudioMute>") . jtx/mute-volume)
+	  (,(kbd "C-z b") . bluetooth-list-devices)
+	  ([s-left] . windmove-left)
+          ([s-right] . windmove-right)
+          ([s-up] . windmove-up)
+          ([s-down] . windmove-down)))
 
-(setq exwm-input-global-keys
-      `((,(kbd "s-r") . exwm-reset)
-	(,(kbd "s-w") . exwm-workspace-switch)
-	(,(kbd "C-z d") . dmenu)
-	(,(kbd "<XF86AudioLowerVolume>") . jtx/lower-volume)
-	(,(kbd "<XF86AudioRaiseVolume>") . jtx/raise-volume)
-	(,(kbd "<XF86AudioMute>") . jtx/mute-volume)))
-
-;;(exwm-enable)
+  ;;(exwm-enable)
+  )
 #+end_src
-
+** exwm desktop file
+#+begin_src conf :tangle no
+	#"/sudo::/usr/share/xsessions/exwm.desktop" :mkdirp yes
+[Desktop Entry]
+Name=EXWM
+Comment=Emacs Window Manager
+Exec=sh /home/daviwil/.emacs.d/exwm/start-exwm.sh
+TryExec=sh
+Type=Application
+X-LightDM-DesktopName=exwm
+DesktopNames=exwm
+#+end_src
 

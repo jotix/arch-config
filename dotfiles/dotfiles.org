@@ -280,7 +280,7 @@ end)
 #+begin_src sh :tangle  ~/.xinitrc
 case $HOSTNAME in
     jtx-arch)
-	setxkbmap us
+	setxkbmap us -variant altgr-intl
 	;;
     ffm-arch)
 	setxkbmap es
@@ -289,6 +289,6 @@ esac
 
 picom &
 emacs --daemon -f exwm-enable
-exec emacsclient -c
-#exec emacs -fs
+exec emacsclient -c 
+#exec emacs --debug-init --load "~/.emacs.d/exwm.el"
 #+end_src
