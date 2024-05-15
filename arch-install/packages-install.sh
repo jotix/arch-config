@@ -19,6 +19,7 @@ unzip
 emacs
 libvterm
 libtool
+stow
 base-devel
 cmake
 bluez

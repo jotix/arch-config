@@ -2,7 +2,7 @@
 #+TITLE: JOTIX exwm config.org
 #+DESCRIPTION: jotix's desktop environment config.
 #+STARTUP: overview
-#+PROPERTY: header-args :tangle ~/.emacs.d/exwm.el :mkdirp yes
+#+PROPERTY: header-args :tangle ./exwm.el :mkdirp yes
 #+auto_tangle: t
 
 * extra packages

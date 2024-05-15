@@ -38,6 +38,6 @@ read_input() {
 }
 
 ### count characters
-count_chars () {
+count_chars() {
     echo -n "$1" | wc -c
 }

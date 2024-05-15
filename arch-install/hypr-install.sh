@@ -10,6 +10,8 @@ xdg-desktop-portal-gtk
 wlr-randr
 waybar
 dunst
+rofi-wayland
+blueman
 "
 
 sudo pacman -S --noconfirm --needed $PACKAGES
