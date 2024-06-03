@@ -6,20 +6,12 @@ ntfs-3g
 dosfstools
 btrfs-progs
 os-prober
-xorg
-xorg-xinit
-xorg-xrandr
 xf86-video-amdgpu
 vulkan-radeon
-xfce4
-xfce4-goodies
-pop-gtk-theme
-pop-icon-theme
 unzip
 emacs
 libvterm
 libtool
-stow
 base-devel
 cmake
 bluez
@@ -34,8 +26,9 @@ pipewire
 pipewire-alsa
 pipewire-pulse
 pavucontrol
-picom
 ghostscript
+gnome
+gnome-extra
 "
 
 sudo pacman -S --needed --noconfirm $PACKAGES
