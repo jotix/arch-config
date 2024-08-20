@@ -12,6 +12,7 @@ emacs
 libvterm
 libtool
 base-devel
+gparted
 cmake
 bluez
 bluez-utils
