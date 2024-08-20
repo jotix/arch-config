@@ -27,8 +27,8 @@ pipewire-alsa
 pipewire-pulse
 pavucontrol
 ghostscript
-gnome
-gnome-extra
+plasma
+kde-applications
 "
 
 sudo pacman -S --needed --noconfirm $PACKAGES
