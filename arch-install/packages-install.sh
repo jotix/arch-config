@@ -5,7 +5,6 @@ exfatprogs
 ntfs-3g
 dosfstools
 btrfs-progs
-os-prober
 xf86-video-amdgpu
 vulkan-radeon
 unzip
@@ -19,7 +18,6 @@ bluez-utils
 exa
 bat
 fastfetch
-firefox
 ttf-jetbrains-mono
 nerd-fonts
 pipewire
@@ -27,6 +25,14 @@ pipewire-alsa
 pipewire-pulse
 pavucontrol
 ghostscript
+git
+lazygit
+neovim
+kitty
+firefox
+gimp
+inkscape
+libreoffice
 plasma
 kde-applications
 "
