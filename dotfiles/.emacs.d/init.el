@@ -107,8 +107,12 @@
 		      :slant 'italic))
 (jtx/set-font-faces)
 
+;; fullscreen
 ;; (set-frame-parameter (selected-frame) 'fullscreen 'maximized)
 ;; (add-to-list 'default-frame-alist '(fullscreen . maximized))
+
+;; frame-size
+(set-frame-size (selected-frame) 200 48)
 
 (require 'package)
 
@@ -223,7 +227,7 @@
 
 (use-package sly)
 
-;;(use-package treemacs)
+(use-package treemacs)
 
 (use-package lua-mode)
 

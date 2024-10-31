@@ -142,10 +142,15 @@
 		      :slant 'italic))
 (jtx/set-font-faces)
 #+end_src
-** fullscreen
+** initial size
 #+begin_src emacs-lisp
+;; fullscreen
 ;; (set-frame-parameter (selected-frame) 'fullscreen 'maximized)
 ;; (add-to-list 'default-frame-alist '(fullscreen . maximized))
+
+;; frame-size
+(set-frame-size (selected-frame) 200 48)
+
 #+end_src
 * packages
 ** initialize repos
@@ -304,7 +309,7 @@
 #+end_src
 ** treemacs
 #+begin_src emacs-lisp
-;;(use-package treemacs)
+(use-package treemacs)
 #+end_src
 ** lua-mode
 #+begin_src emacs-lisp
