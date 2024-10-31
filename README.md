@@ -53,6 +53,16 @@
 
     arch-chroot /mnt
 
+# install neovim
+
+    sudo pacman -S neovim
+
+# enable pararell downloads in new installation
+
+    nvim /etc/pacman.conf
+    # enable parallel downloads
+    # umcomment the line
+
 # locale config
 
     ln -sf /usr/share/zoneinfo/America/Argentina/Buenos_Aires /etc/localtime
@@ -97,7 +107,7 @@
 
 # unmout & reboot the system
 
-    pacman -S git p7zip neovim openssh
+    pacman -S git p7zip openssh
 
     systemctl enable fstrim.timer
     exit
