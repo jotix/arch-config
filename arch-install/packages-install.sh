@@ -39,6 +39,7 @@ kde-applications
 "
 
 sudo pacman -S --needed --noconfirm $PACKAGES
+sudo systemctl enable sddm
 sudo systemctl enable bluetooth.service
 sudo systemctl start bluetooth.service
 
