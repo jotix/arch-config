@@ -55,11 +55,11 @@
 
 # install neovim
 
-    sudo pacman -S neovim
+    sudo pacman -S helix
 
 # enable pararell downloads in new installation
 
-    nvim /etc/pacman.conf
+    helix /etc/pacman.conf
     # enable parallel downloads
     # umcomment the line
 
@@ -68,20 +68,20 @@
     ln -sf /usr/share/zoneinfo/America/Argentina/Buenos_Aires /etc/localtime
     hwclock –systohc
 
-    nvim /etc/locale.gen
+    helix /etc/locale.gen
     # uncoment en_US.UTF-8
     # uncoment es_AR.UTF-8
 
     locale-gen
 
-    nvim /etc/locale.conf
+    helix /etc/locale.conf
     # LANG=en_US.UTF-8
 
 # network configuration
 
     pacman -S networkmanager ntp
     systemctl enable NetworkManager
-    nvim /etc/hostname
+    helix /etc/hostname
     # jtx-arh
 
 # install the bootloader
@@ -94,7 +94,7 @@
 # install & config sudo
 
     pacman -S sudo
-    nvim /etc/sudoers
+    helix /etc/sudoers
     # uncoment
     # %wheel ALL=(ALL:ALL) ALL
 
@@ -129,6 +129,4 @@
 # final config
 
 install the necesary scripts from arch-config/arch-install
-
-
 

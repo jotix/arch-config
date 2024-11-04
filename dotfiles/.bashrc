@@ -7,8 +7,8 @@ test -s ~/.alias && . ~/.alias || true
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-export EDITOR=nvim
-export VISUAL=nvim
+export EDITOR=helix
+export VISUAL=helix
 export PATH=$PATH:~/.local/bin:~/.scripts
 export GOPATH=~/go
 
@@ -26,8 +26,9 @@ alias lt='exa --tree'
 alias cdc='cd ~/arch-config'
 
 ### alias vim to emacs -nw
-alias vim=nvim
-alias vi=nvim
+alias vim=helix
+alias vi=helix
+alias hx=helix
 
 function _update_ps1() {
     PS1="$($GOPATH/bin/powerline-go -error $? -jobs $(jobs -p | wc -l))"
