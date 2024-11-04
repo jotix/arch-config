@@ -21,6 +21,8 @@ alias l=la
 alias ll='exa -l'
 alias ls=exa
 alias lt='exa --tree'
+alias gitroot='cd $(git rev-parse --show-toplevel)'
+alias gr='gitroot'
 
 ### cd to config folder
 alias cdc='cd ~/arch-config'
