@@ -54,7 +54,7 @@ Copy de ISO file to a disk with Ventoy in it or use the following command to bur
 
 # install neovim
 
-    sudo pacman -S neovim
+    pacman -S neovim
 
 # enable pararell downloads in new installation
 
@@ -80,6 +80,7 @@ Copy de ISO file to a disk with Ventoy in it or use the following command to bur
 
     pacman -S networkmanager ntp
     systemctl enable NetworkManager
+	systemctl enable ntpdate
     nvim /etc/hostname
     # jtx-arh
 
