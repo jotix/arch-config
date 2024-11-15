@@ -118,7 +118,7 @@ Copy de ISO file to a disk with Ventoy in it or use the following command to bur
 
     # jotix-install.sh
     cd ~
-    git clone git@gitlab.com:jujodeve/arch-config.git
+    git clone git@github.com:jotix/arch-config.git
     cd arch-config
     ./link-dotfiles.sh
     cd arch-install
