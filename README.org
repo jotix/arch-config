@@ -1,0 +1,165 @@
+* prepare the USB drive
+
+Copy de ISO file to a disk with Ventoy in it or use the following command to burn the image in a USB stick:
+
+#+begin_src sh
+dd bs=4M if=path/to/archlinux-version-x86_64.iso of=/dev/disk/by-id/usb-My_flash_drive conv=fsync oflag=direct status=progress
+#+end_src
+
+* configure the keyboard
+
+#+begin_src sh
+localectl list-keymaps
+
+loadkeys es
+setfont ter-132b
+
+timedatectl
+#+end_src
+
+* prepare de partitions
+
+#+begin_src sh
+cgdisk /dev/nvme0n1
+
+# make a linux (8300) & an EFI (ef00) partitions
+mkfs.btrfs /dev/nvme0n1p1 -L jtx-system
+mkfs.vfat -F32 /dev/nvme0n1p1 -n JTX-EFI
+mount LABEL=jtx-system /mnt
+btrfs subvolume create /mnt/arch
+btrfs subvolume create /mnt/arch/root
+btrfs subvolume create /mnt/arch/home
+umount -R /mnt
+#+end_src
+
+* mount the partitions in the right place
+
+#+begin_src sh
+mount LABEL=jtx-system /mnt -osubvol=/arch/root
+mkdir -p /mnt/home
+mkdir -p /mnt/boot/efi
+mount LABEL=jtx-system /mnt -osubvol=/arch/root
+mount LABEL=JTX-EFI /mnt/boot/efi
+#+end_src
+
+* enable pararell downloads
+
+#+begin_src sh
+    nvim /etc/pacman.conf
+    # enable parallel downloads
+    # umcomment the line
+#+end_src
+
+* install the base system
+
+#+begin_src sh
+pacstrap /mnt base linux linux-firmware
+#+end_src
+
+* generate the fstab file
+
+#+begin_src sh
+genfstab -U /mnt >> /mnt/etc/fstab
+#+end_src
+
+* chroot in the new system
+
+#+begin_src sh
+arch-chroot /mnt
+#+end_src
+
+* install neovim
+
+#+begin_src sh
+pacman -S neovim
+#+end_src
+
+* enable pararell downloads in new installation
+
+#+begin_src sh
+nvim /etc/pacman.conf
+# enable parallel downloads
+# umcomment the line
+#+end_src
+
+* locale config
+
+#+begin_src sh
+ln -sf /usr/share/zoneinfo/America/Argentina/Buenos_Aires /etc/localtime
+hwclock –systohc
+
+nvim /etc/locale.gen
+# uncoment en_US.UTF-8
+# uncoment es_AR.UTF-8
+
+locale-gen
+
+echo LANG=en_US.UTF-8 > /etc/locale.conf
+#+end_src
+
+* network configuration
+
+#+begin_src sh
+pacman -S networkmanager ntp
+systemctl enable NetworkManager
+systemctl enable ntpdate
+echo jtx-arch > /etc/hostname
+#+end_src
+
+* install the bootloader
+
+#+begin_src sh
+pacman -S grub efibootmgr amd-ucode 
+
+grub-install –target=x86_64-efi –efi-directory=/boot/efi –bootloader-id=Arch-Grub
+grub-mkconfig -o /boot/grub/grub/cfg
+#+end_src
+
+* install & config sudo
+
+#+begin_src sh
+pacman -S sudo
+nvim /etc/sudoers
+# uncoment
+# %wheel ALL=(ALL:ALL) ALL
+#+end_src
+
+* set the password & user
+
+#+begin_src sh
+passwd
+
+useradd -m -G whell -s /bin/bash jotix
+passwd jotix
+#+end_src
+
+* unmout & reboot the system
+
+#+begin_src sh
+pacman -S git p7zip openssh
+
+systemctl enable fstrim.timer
+exit
+
+umount -R /mnt
+reboot
+#+end_src
+
+* configuring the new system
+
+#+begin_src sh
+cd /mnt/Ventoy/jotix
+./jotix-install.sh
+cd ~
+git clone git@github.com:jotix/arch-config.git
+cd arch-config
+./link-dotfiles.sh
+cd arch-install
+./packages-install.sh
+reboot
+#+end_src
+
+* final config
+
+install the necesary scripts from arch-config/arch-install
+
