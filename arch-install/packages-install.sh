@@ -34,12 +34,12 @@ firefox
 gimp
 inkscape
 libreoffice
-plasma
-kde-applications
+gnome
+gnome-extra
 "
 
 sudo pacman -S --needed --noconfirm $PACKAGES
-sudo systemctl enable sddm
+sudo systemctl enable gdm
 sudo systemctl enable bluetooth.service
 sudo systemctl start bluetooth.service
 

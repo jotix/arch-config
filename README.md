@@ -1,4 +1,6 @@
 # prepare the USB drive
+
+Copy de ISO file to a disk with Ventoy in it or use the following command to burn the image in a USB stick:
     
     dd bs=4M if=path/to/archlinux-version-x86_64.iso of=/dev/disk/by-id/usb-My_flash_drive conv=fsync oflag=direct status=progress
 
@@ -32,9 +34,6 @@
     mount LABEL=jtx-system /mnt -osubvol=/arch/root
     mount LABEL=JTX-EFI /mnt/boot/efi
 
-    mkswap -U clear --size 4G --file /mnt/swapfile
-    swapon /mnt/swapfile
-
 # enable pararell downloads
 
     nvim /etc/pacman.conf
@@ -55,11 +54,11 @@
 
 # install neovim
 
-    sudo pacman -S helix
+    sudo pacman -S neovim
 
 # enable pararell downloads in new installation
 
-    helix /etc/pacman.conf
+    nvim /etc/pacman.conf
     # enable parallel downloads
     # umcomment the line
 
@@ -68,20 +67,20 @@
     ln -sf /usr/share/zoneinfo/America/Argentina/Buenos_Aires /etc/localtime
     hwclock –systohc
 
-    helix /etc/locale.gen
+    nvim /etc/locale.gen
     # uncoment en_US.UTF-8
     # uncoment es_AR.UTF-8
 
     locale-gen
 
-    helix /etc/locale.conf
+    nvim /etc/locale.conf
     # LANG=en_US.UTF-8
 
 # network configuration
 
     pacman -S networkmanager ntp
     systemctl enable NetworkManager
-    helix /etc/hostname
+    nvim /etc/hostname
     # jtx-arh
 
 # install the bootloader
@@ -94,7 +93,7 @@
 # install & config sudo
 
     pacman -S sudo
-    helix /etc/sudoers
+    nvim /etc/sudoers
     # uncoment
     # %wheel ALL=(ALL:ALL) ALL
 
