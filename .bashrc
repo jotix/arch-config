@@ -28,7 +28,7 @@ alias gr='gitroot'
 alias camara='mpv rtsp://jujodeve:SuperJoti3275@192.168.0.6/stream1 --profile=low-latency --no-audio'
 
 ### dotfiles
-alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias config='/usr/bin/git --git-dir=$HOME/.arch-config/ --work-tree=$HOME'
 
 ### alias helix
 alias vim=helix
