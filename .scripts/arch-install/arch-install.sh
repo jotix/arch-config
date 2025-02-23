@@ -20,12 +20,6 @@ if [[ $HOST != "jtx" ]] && [[ $HOST != "ffm" ]]; then
 fi
 HOST=$HOST-arch
 
-echo
-DESKTOP=""
-while [[ $DESKTOP != "gnome" ]] && [[ $DESKTOP != "plasma" ]]; do
-    read -p "Which desktop environment (plasma/gnome): " DESKTOP
-done
-
 echo 
 read -p "The disk $DISK will be complete deleted. Continue? (yes/no): " CONTINUE
 if [[ $CONTINUE != "yes" ]]; then
@@ -146,20 +140,8 @@ chr locale-gen
 echo LANG=en_US.UTF-8 > /mnt/etc/locale.conf
 
 ### Desktop Environment ########################################################
-
-case $DESKTOP in
-
-    plasma)
-	chr pacman -S --noconfirm --needed plasma kde-applications kitty system-config-printer tesseract-data-eng
-	chr systemctl enable sddm
-	;;
-
-    gnome)
-	chr pacman -S --noconfirm --needed gnome gnome-extra gnome-browser-connector ghostty
-	chr systemctl enable gdm
-	;;
-
-esac
+chr pacman -S --noconfirm --needed plasma kde-applications kitty system-config-printer tesseract-data-eng
+chr systemctl enable sddm
 
 ### install packages ##########################################################
 PACKAGES="
