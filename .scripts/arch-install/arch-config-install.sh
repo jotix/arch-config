@@ -1,4 +1,4 @@
-git clone --bare git@github.com:jotix/.dotfiles $HOME/.dotfiles
+git clone --bare git@github.com:jotix/arch-config $HOME/.arch-config
 function config {
    /usr/bin/git --git-dir=$HOME/.arch-config/ --work-tree=$HOME $@
 }
