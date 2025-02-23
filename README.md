@@ -5,7 +5,7 @@
 After rebooting, in the new system with jotix user execute
 
     /mnt/jtx-ssd/jotix/jotix-install.sh
-    curl -fsSL https://jotix.short.gy/dotfiles-install | sh
+    curl -fsSL https://jotix.short.gy/arch-config-install | sh
 
 # Arch Linux
 
