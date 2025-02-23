@@ -7,7 +7,7 @@ sudo pacman -U --noconfirm ./printer-drivers/*.zst
 go install github.com/justjanne/powerline-go@latest
 
 ### gnome extension manager
-flatpak install flathub com.mattjakeman.ExtensionManager
+# flatpak install flathub com.mattjakeman.ExtensionManager
 
 ### steam
 flatpak install com.valvesoftware.Steam
@@ -22,6 +22,3 @@ if [[ -b "/dev/disk/by-label/jtx-nvme" ]]; then
     flatpak override --filesystem=/mnt/jtx-nvme com.valvesoftware.Steam --user
     # flatpak override --filesystem=/mnt/jtx-nvme gg.minion.Minion --user
 fi
-
-### google-chrome
-# flatpak install com.google.Chrome
