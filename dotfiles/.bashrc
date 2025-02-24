@@ -7,8 +7,8 @@ test -s ~/.alias && . ~/.alias || true
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-export EDITOR=nvim
-export VISUAL=emacsclient
+export EDITOR=helix
+export VISUAL=zeditor
 export PATH=$PATH:~/.local/bin:~/.scripts
 export GOPATH=~/go
 
@@ -27,8 +27,8 @@ alias gr='gitroot'
 ### camara negocio
 alias camara='mpv rtsp://jujodeve:SuperJoti3275@192.168.0.6/stream1 --profile=low-latency --no-audio'
 
-### dotfiles
-alias config='/usr/bin/git --git-dir=$HOME/.arch-config/ --work-tree=$HOME'
+### arch-config
+alias cdc='cd ~/arch-config'
 
 ### alias helix
 alias vim=helix
