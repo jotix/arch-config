@@ -23,5 +23,3 @@ if [[ -b "/dev/disk/by-label/jtx-nvme" ]]; then
     # flatpak override --filesystem=/mnt/jtx-nvme gg.minion.Minion --user
 fi
 
-### google-chrome
-flatpak install com.google.Chrome
