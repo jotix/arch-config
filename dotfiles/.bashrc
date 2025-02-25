@@ -38,6 +38,9 @@ alias nvim=helix
 ### alias zed
 alias zed=zeditor
 
+### alias plasma-reload
+alias plasma-reload="systemctl restart --user plasma-plasmashell"
+
 alias google_drive_upload="rclone copy ~/Documents jujodeve:"
 alias gdu=google_drive_upload
 alias f1tv='kwin_wayland "firefox -P" &'
