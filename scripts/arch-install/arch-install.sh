@@ -4,7 +4,7 @@ set -e
 
 echo
 lsblk -o +LABEL
-echo 
+echo
 read -p "In which disk will NixOS be instaled: " DISK
 DISK="/dev/$DISK"
 if [[ ! -b $DISK ]]; then
@@ -12,7 +12,7 @@ if [[ ! -b $DISK ]]; then
     exit
 fi
 
-echo 
+echo
 read -p "Wich host install (jtx or ffm): " HOST
 if [[ $HOST != "jtx" ]] && [[ $HOST != "ffm" ]]; then
     echo "The host $HOST doesn't exists"
@@ -20,14 +20,14 @@ if [[ $HOST != "jtx" ]] && [[ $HOST != "ffm" ]]; then
 fi
 HOST=$HOST-arch
 
-echo 
+echo
 read -p "The disk $DISK will be complete deleted. Continue? (yes/no): " CONTINUE
 if [[ $CONTINUE != "yes" ]]; then
     echo "Aborting installation."
     exit
 fi
 
-echo 
+echo
 read -p "REALLY? (YES/NO): " CONTINUE
 if [[ $CONTINUE != "YES" ]]; then
     echo "Aborting installation."
@@ -105,7 +105,7 @@ if [[ -b "/dev/disk/by-label/jtx-ssd" ]]; then
 fi
 
 if [[ -b "/dev/disk/by-label/jtx-nvme" ]]; then
-  mkdir -p /mnt/mnt/jtx-nvme 
+  mkdir -p /mnt/mnt/jtx-nvme
   mount LABEL=jtx-nvme /mnt/mnt/jtx-nvme -osubvol=/
 fi
 
@@ -149,7 +149,7 @@ networkmanager ntp
 exfatprogs ntfs-3g dosfstools btrfs-progs
 efibootmgr amd-ucode
 unzip p7zip
-base-devel cmake sudo
+base-devel cmake sudo fish
 less man-pages man-db
 exa bat fastfetch lsb-release
 ttf-jetbrains-mono ttf-jetbrains-mono-nerd
@@ -190,11 +190,13 @@ sed -i -e 's/# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/g' /mnt/etc/sud
 ### set the password & users
 echo -e "\nSET ROOT PASSWORD\n"
 chr passwd
+
 echo -e "\nSET JOTIX PASSWORD\n"
-chr useradd -m -G wheel -s /bin/bash jotix
+chr useradd -m -G wheel -s /usr/bin/fish jotix
 chr passwd jotix
+
 if [[ $HOST == "ffm-arch" ]]; then
-    chr useradd -m -s /bin/bash filofem
+    chr useradd -m -s /usr/bin/fish filofem
     echo -e "\nSET FILOFEM PASSWORD"
     chr passwd filofem
 fi
