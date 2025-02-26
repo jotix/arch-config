@@ -30,3 +30,11 @@ kwriteconfig6 --file plasmashellrc --group PlasmaViews --group "Panel 2" --group
 
 ### powerdevilrc
 kwriteconfig6 --file powerdevilrc --group AC --group SuspendAndShutdown --key AutoSuspendAction 0
+
+### mimeapps.list
+kwriteconfig6 --file mimeapps.list --group "Added Associations" --key "x-scheme-handler/http" "chromium.desktop;"
+kwriteconfig6 --file mimeapps.list --group "Added Associations" --key "x-scheme-handler/https" "chromium.desktop;"
+
+kwriteconfig6 --file mimeapps.list --group "Default Applications" --key "x-scheme-handler/http" "chromium.desktop;"
+kwriteconfig6 --file mimeapps.list --group "Default Applications" --key "x-scheme-handler/https" "chromium.desktop;"
+
