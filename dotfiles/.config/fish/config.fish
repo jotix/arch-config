@@ -46,6 +46,8 @@ alias f1tv 'kwin_wayland "firefox -P" &'
 alias 2monitors "kscreen-doctor output.DP-1.enable output.DP-1.position.-1920,450 output.HDMI-A-1.position.0,0"
 alias 1monitor "kscreen-doctor output.DP-1.disable output.HDMI-A-1.position.0,0"
 
+alias kde-settings '/home/jotix/arch-config/scripts/kde-settings.sh'
+
 function fish_prompt
     eval $GOPATH/bin/powerline-go -error $status -jobs (count (jobs -p))
 end

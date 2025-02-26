@@ -18,15 +18,15 @@ kwriteconfig6 --file plasma-localerc --group Formats --key LC_TELEPHONE es_AR.UT
 kwriteconfig6 --file plasma-localerc --group Formats --key LC_TIME es_AR.UTF-8
 
 ### kxkbrc
-kwriteconfig6 --file kxkbrc --group Layouts --key LayoutList --value us
-kwriteconfig6 --file kxkbrc --group Layouts --key Use --type bool --value true
-kwriteconfig6 --file kxkbrc --group Layouts --key VariantList --value altgr-intl
+kwriteconfig6 --file kxkbrc --group Layouts --key LayoutList us
+kwriteconfig6 --file kxkbrc --group Layouts --key Use --type bool true
+kwriteconfig6 --file kxkbrc --group Layouts --key VariantList altgr-intl
 
 ### plasmashellrc
-kwriteconfig6 --file plasmashellrc --group PlasmaViews --group "Panel 2" --key floating --value 1
-kwriteconfig6 --file plasmashellrc --group PlasmaViews --group "Panel 2" --key panelLengthMode --value 1
-kwriteconfig6 --file plasmashellrc --group PlasmaViews --group "Panel 2" --key panelVisibility --value 2
-kwriteconfig6 --file plasmashellrc --group PlasmaViews --group "Panel 2" --group Defaults --key thickness --value 56
+kwriteconfig6 --file plasmashellrc --group PlasmaViews --group "Panel 2" --key floating 1
+kwriteconfig6 --file plasmashellrc --group PlasmaViews --group "Panel 2" --key panelLengthMode 1
+kwriteconfig6 --file plasmashellrc --group PlasmaViews --group "Panel 2" --key panelVisibility 2
+kwriteconfig6 --file plasmashellrc --group PlasmaViews --group "Panel 2" --group Defaults --key thickness 56
 
 ### powerdevilrc
-kwriteconfig6 --file powerdevilrc --group AC --group SuspendAndShutdown --key AutoSuspendAction --value 0
+kwriteconfig6 --file powerdevilrc --group AC --group SuspendAndShutdown --key AutoSuspendAction 0
