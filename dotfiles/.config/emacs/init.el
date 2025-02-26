@@ -464,15 +464,15 @@
 (global-set-key (kbd "C-x d") #'(lambda () (interactive) (dired ".")))
 ;;(global-set-key (kbd "C-x C-f") #'(lambda () (interactive) (find-file "./")))
 
-;; (define-key org-mode-map (kbd "M-<left>") 'windmove-left)
-;; (define-key org-mode-map (kbd "M-<right>") 'windmove-right)
-;; (define-key org-mode-map (kbd "M-<up>") 'windmove-up)
-;; (define-key org-mode-map (kbd "M-<down>") 'windmove-down)
+(define-key org-mode-map (kbd "s-<left>") 'windmove-left)
+(define-key org-mode-map (kbd "s-<right>") 'windmove-right)
+(define-key org-mode-map (kbd "s-<up>") 'windmove-up)
+(define-key org-mode-map (kbd "s-<down>") 'windmove-down)
 
-;; (global-set-key (kbd "M-<left>") 'windmove-left)
-;; (global-set-key (kbd "M-<right>") 'windmove-right)
-;; (global-set-key (kbd "M-<up>") 'windmove-up)
-;; (global-set-key (kbd "M-<down>") 'windmove-down)
+(global-set-key (kbd "s-<left>") 'windmove-left)
+(global-set-key (kbd "s-<right>") 'windmove-right)
+(global-set-key (kbd "s-<up>") 'windmove-up)
+(global-set-key (kbd "s-<down>") 'windmove-down)
 
 ;; Make dired open in the same window when using RET or ^
 (put 'dired-find-alternate-file 'disabled nil) ; disables warning
