@@ -53,7 +53,7 @@
 (setq global-auto-revert-non-file-buffers t)
 
 ;; undo-history files location
-(setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo")))
+(setq undo-tree-history-directory-alist '(("." . "~/.config/emacs/undo")))
 
 ;; avoid confirmation for closinbg a buffer with a running process 
 (setq kill-buffer-query-functions (delq 'process-kill-buffer-query-function kill-buffer-query-functions))
