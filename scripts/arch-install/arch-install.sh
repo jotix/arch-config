@@ -21,6 +21,12 @@ fi
 HOST=$HOST-arch
 
 echo
+DESKTOP=""
+while [[ $DESKTOP != "gnome" ]] && [[ $DESKTOP != "plasma" ]]; do
+    read -p "Which desktop environment (plasma/gnome): " DESKTOP
+done
+
+echo
 read -p "The disk $DISK will be complete deleted. Continue? (yes/no): " CONTINUE
 if [[ $CONTINUE != "yes" ]]; then
     echo "Aborting installation."
@@ -110,7 +116,7 @@ if [[ -b "/dev/disk/by-label/jtx-nvme" ]]; then
 fi
 
 ### enable parallel downloads
-sed -i -e 's/#ParallelDownloads = 5/ParallelDownloads = 10/g' /etc/pacman.conf
+sed -i -e 's/ParallelDownloads = 5/ParallelDownloads = 10/g' /etc/pacman.conf
 
 ### install base system
 pacstrap /mnt base linux linux-firmware
@@ -140,8 +146,17 @@ chr locale-gen
 echo LANG=en_US.UTF-8 > /mnt/etc/locale.conf
 
 ### Desktop Environment ########################################################
-chr pacman -S --noconfirm --needed plasma kde-applications kitty system-config-printer tesseract-data-eng
-chr systemctl enable sddm
+case $DESKTOP in
+
+    plasma)
+	chr pacman -S --noconfirm --needed plasma kde-applications kitty system-config-printer tesseract-data-eng
+	chr systemctl enable sddm
+	;;
+
+    gnome)
+	chr pacman -S --noconfirm --needed gnome gnome-extra gnome-browser-connector ghostty
+	chr systemctl enable gdm
+	;;
 
 ### install packages ##########################################################
 PACKAGES="
