@@ -7,7 +7,7 @@ sudo pacman -U --noconfirm ./printer-drivers/*.zst
 go install github.com/justjanne/powerline-go@latest
 
 ### gnome extension manager
-# flatpak install flathub com.mattjakeman.ExtensionManager
+flatpak install flathub com.mattjakeman.ExtensionManager
 
 ### steam
 flatpak install com.valvesoftware.Steam
