@@ -1,7 +1,16 @@
 #!/usr/bin/env bash
 
+cd
+
+git clone git@github.com:jotix/arch-config.git $HOME/arch-config
+
+if [ ! -d /home/jotix/arch-config ] ; then
+    echo INSTALL JOTIX KEY !!
+    exit
+fi
+
 ### printer drivers
-sudo pacman -U --noconfirm ./printer-drivers/*.zst
+sudo pacman -U --noconfirm /home/jotix/arch-config/printer-drivers/*.zst
 
 ### powerline-go
 go install github.com/justjanne/powerline-go@latest
@@ -23,3 +32,11 @@ if [[ -b "/dev/disk/by-label/jtx-nvme" ]]; then
     # flatpak override --filesystem=/mnt/jtx-nvme gg.minion.Minion --user
 fi
 
+cd ~/arch-config/dotfiles
+./unstow.sh
+stow .
+cd
+
+/home/jotix/arch-config/scripts/dconf-settings.sh
+
+/home/jotix/arch-config/scripts/google-chrome-install.sh
