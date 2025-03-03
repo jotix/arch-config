@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 
-cd
+if [[ -b "/dev/disk/by-label/Ventoy" ]]; then
+    mkdir -p /mnt/Ventoy
+    sudo mount LABEL=Ventoy /mnt/Ventoy
+    /mnt/Ventoy/jotix/jotix-install.sh
+    cp -rv /mnt/Ventoy/google-chrome /home/jotix/.config/
+fi
 
 git clone git@github.com:jotix/arch-config.git $HOME/arch-config
 
