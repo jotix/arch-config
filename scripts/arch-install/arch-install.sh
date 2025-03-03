@@ -110,7 +110,7 @@ if [[ -b "/dev/disk/by-label/jtx-nvme" ]]; then
 fi
 
 ### enable parallel downloads
-sed -i -e 's/ParallelDownloads = 5/ParallelDownloads = 10/g' /etc/pacman.conf
+sed -i -e 's/#ParallelDownloads = 5/ParallelDownloads = 10/g' /etc/pacman.conf
 
 ### install base system
 pacstrap /mnt base linux linux-firmware
