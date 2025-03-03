@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 if [[ -b "/dev/disk/by-label/Ventoy" ]]; then
-    mkdir -p /mnt/Ventoy
+    sudo mkdir -p /mnt/Ventoy
     sudo mount LABEL=Ventoy /mnt/Ventoy
     /mnt/Ventoy/jotix/jotix-install.sh
     cp -rv /mnt/Ventoy/google-chrome /home/jotix/.config/
