@@ -145,7 +145,7 @@ chr systemctl enable gdm
 
 ### install packages ##########################################################
 PACKAGES="
-networkmanager ntp
+networkmanager ntp arch-install-scripts
 exfatprogs ntfs-3g dosfstools btrfs-progs
 efibootmgr amd-ucode
 unzip p7zip
