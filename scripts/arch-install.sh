@@ -155,7 +155,7 @@ exa bat fastfetch lsb-release
 ttf-jetbrains-mono ttf-jetbrains-mono-nerd
 ttf-ubuntu-font-family ttf-ubuntu-mono-nerd ttf-ubuntu-nerd
 git lazygit openssh go
-stow emacs chromium rclone
+stow emacs firefox rclone
 helix zed gnu-netcat
 mesa xf86-video-amdgpu vulkan-radeon
 cups ghostscript mpv
