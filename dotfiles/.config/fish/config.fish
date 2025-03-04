@@ -45,15 +45,15 @@ alias 1monitor "kscreen-doctor output.DP-1.disable output.HDMI-A-1.position.0,0"
 
 alias kde-settings '/home/jotix/arch-config/scripts/kde-settings.sh'
 
-function fish_prompt
-    set -g __fish_git_prompt_show_informative_status 1
-    set -g __fish_git_prompt_showdirtystate 1
-    set -g __fish_git_prompt_showuntrackedfiles 1
-    set -g __fish_git_prompt_showupstream auto
-    set -g __fish_git_prompt_showstashstate 1
-    set -g __fish_git_prompt_showcolorhints 1
-    printf '%s' $PWD (fish_git_prompt) ' $ > '
-    #eval $GOPATH/bin/powerline-go -error $status -jobs (count (jobs -p))
-end
+# function fish_prompt
+#     set -g __fish_git_prompt_show_informative_status 1
+#     set -g __fish_git_prompt_showdirtystate 1
+#     set -g __fish_git_prompt_showuntrackedfiles 1
+#     set -g __fish_git_prompt_showupstream auto
+#     set -g __fish_git_prompt_showstashstate 1
+#     set -g __fish_git_prompt_showcolorhints 1
+#     printf '%s' $PWD (fish_git_prompt) ' $ > '
+#     #eval $GOPATH/bin/powerline-go -error $status -jobs (count (jobs -p))
+# end
 
 fastfetch
