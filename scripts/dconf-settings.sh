@@ -10,6 +10,7 @@ dconf write /org/gnome/desktop/notifications/show-banners false
 dconf write /org/gnome/desktop/wm/preferences/button-layout "'appmenu:minimize,maximize,close'"
 dconf write /org/gnome/Console/last-window-size '(1200, 900)'
 dconf write /org/gnome/shell/favorite-apps "[
+    'chrome-knipfmibhjlpioflafbpemngnoncknab-Default.desktop',
     'google-chrome.desktop',
     'org.gnome.Nautilus.desktop',
     'emacs.desktop',
