@@ -42,3 +42,6 @@ cd
 /home/jotix/arch-config/scripts/dconf-settings.sh
 
 /home/jotix/arch-config/scripts/google-chrome-install.sh
+
+/home/jotix/arch-config/scripts/shell-color-scripts-install.sh
+
