@@ -17,9 +17,6 @@ fi
 ### printer drivers
 sudo pacman -U --noconfirm /home/jotix/arch-config/scripts/printer-drivers/*.zst
 
-### powerline-go
-go install github.com/justjanne/powerline-go@latest
-
 ### gnome extension manager
 flatpak install flathub com.mattjakeman.ExtensionManager
 
