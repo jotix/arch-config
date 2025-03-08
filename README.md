@@ -1,50 +1,16 @@
-# Jotix's dotfiles
+# Jotix's Arch Linux install scripts & config - dotfiles
 
-## Installation
-
-After rebooting, in the new system with jotix user execute
-
-    /mnt/jtx-ssd/jotix/jotix-install.sh
-    curl -fsSL https://jotix.short.gy/dotfiles-install | sh
-
-# Arch Linux
-
-## Installation
+## Arch installation
 
 Execute the installation script
 
     bash <(curl -fsSL https://jotix.short.gy/arch-install)
 
-# NixOS
+## Config installation (dotfiles)
 
-## Installation
+After rebooting, in the new system with jotix user execute
 
-Run the installation script
-
-	bash <(curl -fsSL https://jotix.short.gy/nixos-install)
-
-## Module Template
-
-    ### NAME Module
-
-    { config, lib, pkgs, ... }:
-
-    {
-      options.OPTION.enable = lib.mkEnableOption "Enable OPTION";
-
-      config = lib.mkIf(config.OPTION.enable) {
-
-      };
-    }
-
-## virtiofs
-
-Error starting domain: operation failed: Unable to find a satisfying virtiofsd
-
-add virtiofsd into your systemPackages and add following into virt-manager filesystem xml:
-
-    <binary path="/run/current-system/sw/bin/virtiofsd"/>
-
+    bash (curl -fsSL https://jotix.short.gy/arch-config-install | psub)
 
 # General Notes
 

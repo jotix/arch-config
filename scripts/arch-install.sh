@@ -4,7 +4,7 @@ set -e
 
 echo
 lsblk -o +LABEL
-echo 
+echo
 read -p "In which disk will NixOS be instaled: " DISK
 DISK="/dev/$DISK"
 if [[ ! -b $DISK ]]; then
@@ -12,7 +12,7 @@ if [[ ! -b $DISK ]]; then
     exit
 fi
 
-echo 
+echo
 read -p "Wich host install (jtx or ffm): " HOST
 if [[ $HOST != "jtx" ]] && [[ $HOST != "ffm" ]]; then
     echo "The host $HOST doesn't exists"
@@ -26,16 +26,9 @@ while [[ $DESKTOP != "gnome" ]] && [[ $DESKTOP != "plasma" ]]; do
     read -p "Which desktop environment (plasma/gnome): " DESKTOP
 done
 
-echo 
+echo
 read -p "The disk $DISK will be complete deleted. Continue? (yes/no): " CONTINUE
 if [[ $CONTINUE != "yes" ]]; then
-    echo "Aborting installation."
-    exit
-fi
-
-echo 
-read -p "REALLY? (YES/NO): " CONTINUE
-if [[ $CONTINUE != "YES" ]]; then
     echo "Aborting installation."
     exit
 fi
@@ -45,19 +38,14 @@ echo "Installing Arch Linux in $DISK"
 echo "Hostname: $HOST"
 echo
 
-if [[ $HOSTNAME == "ffm-arch" ]] || [[ $HOSTNAME == "jtx-arch" ]]; then
-    echo "Executing in testing mode..."
-    exit
-fi
-
 ### disk configuration ########################################################
 
 # create partition table
 sudo parted $DISK mklabel gpt
 
 # make EFI & btrfs partitions
-sudo parted --align optimal -- $DISK mkpart ARCH-BOOT fat32 1M 1G
-sudo parted --align optimal -- $DISK mkpart Arch btrfs 1G 100%
+sudo parted $DISK mkpart ARCH-BOOT fat32 1MiB 1GiB
+sudo parted $DISK mkpart Arch btrfs 1GiB 100%
 
 # set esp flag in EFI partition
 sudo parted $DISK set 1 esp on
@@ -111,7 +99,7 @@ if [[ -b "/dev/disk/by-label/jtx-ssd" ]]; then
 fi
 
 if [[ -b "/dev/disk/by-label/jtx-nvme" ]]; then
-  mkdir -p /mnt/mnt/jtx-nvme 
+  mkdir -p /mnt/mnt/jtx-nvme
   mount LABEL=jtx-nvme /mnt/mnt/jtx-nvme -osubvol=/
 fi
 
@@ -150,12 +138,12 @@ echo LANG=en_US.UTF-8 > /mnt/etc/locale.conf
 case $DESKTOP in
 
     plasma)
-	chr pacman -S --noconfirm --needed plasma kde-applications kitty system-config-printer tesseract-data-eng
+	chr pacman -S --noconfirm --needed plasma kde-applications system-config-printer tesseract-data-eng
 	chr systemctl enable sddm
 	;;
 
     gnome)
-	chr pacman -S --noconfirm --needed gnome gnome-extra gnome-browser-connector ghostty
+	chr pacman -S --noconfirm --needed gnome gnome-extra gnome-browser-connector
 	chr systemctl enable gdm
 	;;
 
@@ -163,18 +151,17 @@ esac
 
 ### install packages ##########################################################
 PACKAGES="
-networkmanager ntp
+networkmanager ntp arch-install-scripts
 exfatprogs ntfs-3g dosfstools btrfs-progs
 efibootmgr amd-ucode
 unzip p7zip
-base-devel cmake sudo
+base-devel cmake sudo fish
 less man-pages man-db
-exa bat fastfetch lsb-release
+exa bat lsb-release usbutils
 ttf-jetbrains-mono ttf-jetbrains-mono-nerd
 ttf-ubuntu-font-family ttf-ubuntu-mono-nerd ttf-ubuntu-nerd
-git lazygit openssh go
-stow firefox rclone
-helix zed gnu-netcat
+git lazygit openssh
+stow rclone neovim emacs
 mesa xf86-video-amdgpu vulkan-radeon
 cups ghostscript mpv
 "
@@ -208,25 +195,23 @@ sed -i -e 's/# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/g' /mnt/etc/sud
 ### set the password & users
 echo -e "\nSET ROOT PASSWORD\n"
 chr passwd
+
 echo -e "\nSET JOTIX PASSWORD\n"
-chr useradd -m -G wheel -s /bin/bash jotix
+chr useradd -m -G wheel -s /usr/bin/fish jotix
 chr passwd jotix
+
 if [[ $HOST == "ffm-arch" ]]; then
-    chr useradd -m -s /bin/bash filofem
+    chr useradd -m -s /usr/bin/fish filofem
     echo -e "\nSET FILOFEM PASSWORD"
     chr passwd filofem
 fi
-
-### install & config libvirt
-chr pacman -S --noconfirm --ask=4 libvirt iptables-nft dnsmasq dmidecode virt-manager qemu-full
-chr usermod -a -G libvirt jotix
 
 ### enable services
 chr systemctl enable fstrim.timer
 chr systemctl enable cups.service
 chr systemctl enable NetworkManager
 chr systemctl enable ntpdate
-chr systemctl enable libvirtd.service
+chr systemctl enable gdm
 
 ### unmount & reboot
 echo "Installation finished, you can do some final asjustements now or reboot and use the new system:
