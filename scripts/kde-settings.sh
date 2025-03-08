@@ -30,4 +30,7 @@ kwriteconfig6 --file plasmashellrc --group PlasmaViews --group "Panel 2" --group
 ### powerdevilrc
 kwriteconfig6 --file powerdevilrc --group AC --group SuspendAndShutdown --key AutoSuspendAction 0
 
+### konsolerc
+kwriteconfig6 --file konsolerc --key MenuBar Disabled
+kwriteconfig6 --file konsolerc --group "Desktop Entry" --key DefaultProfile jotix.profile
 
