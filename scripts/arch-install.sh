@@ -152,7 +152,7 @@ esac
 ### install packages ##########################################################
 PACKAGES="
 networkmanager ntp arch-install-scripts
-exfatprogs ntfs-3g dosfstools btrfs-progs
+exfat-utils ntfs-3g dosfstools btrfs-progs
 efibootmgr amd-ucode
 unzip p7zip
 base-devel cmake sudo fish
