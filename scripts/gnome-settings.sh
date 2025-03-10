@@ -35,3 +35,5 @@ dconf write /org/gnome/shell/enabled-extensions "[
 
 dconf write /org/gnome/desktop/input-sources/sources "[('xkb', 'us+altgr-intl')]"
 
+dconf write /org/gnome/desktop/interface/monospace-font-name "'JetBrains Mono 10'"
+
