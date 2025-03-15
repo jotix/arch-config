@@ -24,15 +24,21 @@ $CONFIG_DIR/link-dotfiles.sh
 ### other install scripts
 # printers
 $SCRIPTS_DIR/printers-install.sh
-# google-chrome AUR
+
+# google-chrome
 # $SCRIPTS_DIR/google-chrome-install.sh
+
 # DT colorscript
 $SCRIPTS_DIR/shell-color-scripts-install.sh
+
 # virtualization
 $SCRIPTS_DIR/virt-install.sh
+
 # steam
 $SCRIPTS_DIR/steam-install.sh
+
 # gnome extension manager
 $SCRIPTS_DIR/extension-manager-install.sh
+
 # gnome settings
 $SCRIPTS_DIR/gnome-settings.sh
