@@ -1,4 +1,3 @@
-
 #!/usr/bin/env bash
 
 dconf write /org/gtk/gtk4/settings/file-chooser/sort-directories-first true
@@ -12,12 +11,9 @@ dconf write /org/gnome/desktop/wm/preferences/button-layout "'appmenu:minimize,m
 dconf write /org/gnome/Console/last-window-size '(1200, 900)'
 dconf write /org/gnome/shell/favorite-apps "[
     'firefox.desktop',
-    'chrome-knipfmibhjlpioflafbpemngnoncknab-Default.desktop',
-    'google-chrome.desktop',
     'org.gnome.Console.desktop',
+    'dev.zed.Zed.desktop',
     'org.gnome.Nautilus.desktop',
-    'emacs.desktop',
-    'com.mitchellh.ghostty.desktop',
     'com.valvesoftware.Steam.desktop',
     'org.gnome.Settings.desktop',
     'com.mattjakeman.ExtensionManager.desktop',

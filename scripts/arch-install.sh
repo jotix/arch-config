@@ -161,7 +161,7 @@ exa bat lsb-release usbutils
 ttf-jetbrains-mono ttf-jetbrains-mono-nerd
 ttf-ubuntu-font-family ttf-ubuntu-mono-nerd ttf-ubuntu-nerd
 git lazygit openssh
-stow rclone neovim emacs
+stow rclone neovim zed gnu-netcat
 mesa xf86-video-amdgpu vulkan-radeon
 cups ghostscript mpv
 "
