@@ -8,6 +8,7 @@ if [[ -b "/dev/disk/by-label/Ventoy" ]]; then
     sudo mount LABEL=Ventoy /mnt/Ventoy
     tar -xf /mnt/Ventoy/jotix/jotix.tar.xz -C $HOME
     tar -xf /mnt/Ventoy/jotix/google-chrome.tar.xz -C $HOME/.config
+    tar -xf /mnt/Ventoy/jotix/.mozilla.tar.xz -C $HOME
 fi
 
 git clone git@github.com:jotix/arch-config.git $CONFIG_DIR
@@ -18,13 +19,13 @@ if [ ! -d $HOME/arch-config ] ; then
 fi
 
 ### link-dotfiles
-$CONFIG_DIR/link-dotfiles.sh 
+$CONFIG_DIR/link-dotfiles.sh
 
 ### other install scripts
 # printers
 $SCRIPTS_DIR/printers-install.sh
 # google-chrome AUR
-$SCRIPTS_DIR/google-chrome-install.sh
+# $SCRIPTS_DIR/google-chrome-install.sh
 # DT colorscript
 $SCRIPTS_DIR/shell-color-scripts-install.sh
 # virtualization
