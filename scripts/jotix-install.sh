@@ -19,7 +19,7 @@ git clone git@github.com:jotix/arch-config.git $CONFIG_PATH
 $CONFIG_PATH/link-dotfiles.sh
 
 # gnome extension manager
-$SCRIPTS/extension-manager-install.sh
+$SCRIPTS_PATH/extension-manager-install.sh
 
 # gnome-settings
 $SCRIPTS_PATH/gnome-settings.sh
