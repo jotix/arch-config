@@ -43,4 +43,4 @@ alias activate-venv 'source venv/bin/activate.fish'
 ### enable vi mode
 fish_vi_key_bindings
 
-colorscript -r
+fastfetch

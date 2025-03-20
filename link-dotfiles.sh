@@ -18,7 +18,7 @@ process-file() {
     [[ -f $DESTINY ]] && mv $DESTINY $DESTINY.backup
 
     [[ -f $FILE ]] && echo procesing $DESTINY && ln -sf $FILE $DESTINY
-    
+
 }
 
 process-dir() {
@@ -27,9 +27,5 @@ process-dir() {
 }
 
 echo
-echo Linking the default dotfiles.
-process-dir $DOTFILES_DIR/default
-
-echo
-echo Linking the host specific dotfiles
-process-dir $DOTFILES_DIR/per-host/$HOSTNAME 
+echo Linking dotfiles.
+process-dir $DOTFILES_DIR

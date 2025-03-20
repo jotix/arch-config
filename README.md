@@ -10,7 +10,11 @@ Execute the installation script
 
 After rebooting, in the new system with jotix user execute
 
-    bash (curl -fsSL https://jotix.short.gy/arch-config-install | psub)
+    bash (curl -fsSL https://jotix.short.gy/jotix-install | psub)
+
+Installing filofem user
+
+    bash (curl -fsSL https://jotix.short.gy/filofem-install | psub)
 
 # General Notes
 

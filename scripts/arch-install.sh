@@ -21,12 +21,6 @@ fi
 HOST=$HOST-arch
 
 echo
-DESKTOP=""
-while [[ $DESKTOP != "gnome" ]] && [[ $DESKTOP != "plasma" ]]; do
-    read -p "Which desktop environment (plasma/gnome): " DESKTOP
-done
-
-echo
 read -p "The disk $DISK will be complete deleted. Continue? (yes/no): " CONTINUE
 if [[ $CONTINUE != "yes" ]]; then
     echo "Aborting installation."
@@ -105,6 +99,7 @@ fi
 
 ### enable parallel downloads
 sed -i -e 's/#ParallelDownloads = 5/ParallelDownloads = 10/g' /etc/pacman.conf
+sed -i -e 's/ParallelDownloads = 5/ParallelDownloads = 10/g' /etc/pacman.conf
 
 ### install base system
 pacstrap /mnt base linux linux-firmware
@@ -117,6 +112,7 @@ echo $HOST > /mnt/etc/hostname
 
 ### enable parallel downloads in new installation
 sed -i -e 's/#ParallelDownloads = 5/ParallelDownloads = 10/g' /mnt/etc/pacman.conf
+sed -i -e 's/ParallelDownloads = 5/ParallelDownloads = 10/g' /etc/pacman.conf
 
 ### chroot installation #######################################################
 
@@ -134,20 +130,8 @@ chr locale-gen
 echo LANG=en_US.UTF-8 > /mnt/etc/locale.conf
 
 ### Desktop Environment ########################################################
-
-case $DESKTOP in
-
-    plasma)
-	chr pacman -S --noconfirm --needed plasma kde-applications system-config-printer tesseract-data-eng
-	chr systemctl enable sddm
-	;;
-
-    gnome)
-	chr pacman -S --noconfirm --needed gnome gnome-extra gnome-browser-connector
-	chr systemctl enable gdm
-	;;
-
-esac
+chr pacman -S --noconfirm --needed gnome gnome-extra
+chr systemctl enable gdm
 
 ### install packages ##########################################################
 PACKAGES="
@@ -160,10 +144,10 @@ less man-pages man-db
 exa bat lsb-release usbutils
 ttf-jetbrains-mono ttf-jetbrains-mono-nerd
 ttf-ubuntu-font-family ttf-ubuntu-mono-nerd ttf-ubuntu-nerd
-git lazygit openssh
+git lazygit openssh fastfetch
 stow rclone neovim emacs
 mesa xf86-video-amdgpu vulkan-radeon
-cups ghostscript mpv
+cups ghostscript mpv firefox
 "
 chr pacman -S --noconfirm --needed $PACKAGES
 
@@ -211,7 +195,6 @@ chr systemctl enable fstrim.timer
 chr systemctl enable cups.service
 chr systemctl enable NetworkManager
 chr systemctl enable ntpdate
-chr systemctl enable gdm
 
 ### unmount & reboot
 echo "Installation finished, you can do some final asjustements now or reboot and use the new system:

@@ -1,12 +1,6 @@
 #!/usr/bin/env bash
 
-mkdir -p /home/jotix/workspace
-cd /home/jotix/workspace
+flatpak install com.google.Chrome
 
-git clone https://aur.archlinux.org/google-chrome.git
+flatpak override --user --filesystem=~/.local/share/applications:create --filesystem=~/.local/share/icons:create com.google.Chrome
 
-cd google-chrome
-makepkg -s
-
-sudo pacman -U *.zst
-cd
