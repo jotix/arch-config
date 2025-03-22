@@ -10,8 +10,13 @@ if [[ ! -d "/mnt/Ventoy/filofem" ]]; then
     exit
 fi
 
-### chrome config
-tar -xf /mnt/Ventoy/filofem/google-chrome.tar.xz -C $HOME/.config
+### google chrome
+flatpak remote-add --if-not-exists --user flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+
+flatpak install com.google.Chrome --user
+
+tar -xf /mnt/Ventoy/filofem/google-chrome.tar.xz -C $HOME/.var/app/com.google.Chrome/config/
+
 flatpak override --user --filesystem=~/.local/share/applications:create --filesystem=~/.local/share/icons:create com.google.Chrome
 
 ### gnome settings
