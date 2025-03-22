@@ -147,7 +147,7 @@ ttf-ubuntu-font-family ttf-ubuntu-mono-nerd ttf-ubuntu-nerd
 git lazygit openssh fastfetch
 stow rclone neovim emacs
 mesa xf86-video-amdgpu vulkan-radeon
-cups ghostscript mpv firefox
+cups ghostscript mpv firefox chromium
 "
 chr pacman -S --noconfirm --needed $PACKAGES
 

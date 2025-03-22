@@ -36,7 +36,3 @@ $SCRIPTS_PATH/steam-install.sh
 # udev rules
 $SCRIPTS_PATH/udev-rules-install.sh
 
-# google chrome
-$SCRIPTS_PATH/google-chrome-install.sh
-
-
